@@ -1,417 +1,735 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VAPE ELITE | Colección Premium</title>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;600&display=swap');
-        
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VAPE ELITE | Colección Premium</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;600&display=swap');
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+font-family: 'Inter', sans-serif;
+background: #000000;
+color: #ffffff;
+overflow-x: hidden;
+position: relative;
+}
+/* 🎬 VIMEO BACKGROUND */
+.vimeo-background {
+position: fixed;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+z-index: -2;
+overflow: hidden;
+}
+.vimeo-background iframe {
+position: absolute;
+top: 50%;
+left: 50%;
+min-width: 100%;
+min-height: 100%;
+width: 177.77vh;
+height: 56.25vw;
+transform: translate(-50%, -50%);
+pointer-events: none;
+border: none;
+}
+/* Overlay para legibilidad - MÁS OSCURO EN MÓVILES */
+.video-overlay {
+position: fixed;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+background: linear-gradient(
+180deg,
+rgba(0,0,0,0.10) 0%,
+rgba(5,5,12,0.15) 40%,
+rgba(0,0,0,0.25) 100%
+);
+z-index: -1;
+pointer-events: none;
+}
+/* Header */
+header {
+position: fixed;
+top: 0;
+width: 100%;
+background: rgba(0, 0, 0, 0.75);
+backdrop-filter: blur(15px);
+z-index: 1000;
+padding: 20px 40px;
+border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+transition: all 0.3s ease;
+}
+header.scrolled {
+padding: 15px 40px;
+background: rgba(0, 0, 0, 0.9);
+box-shadow: 0 4px 30px rgba(0, 0, 0, 0.4);
+}
+nav {
+display: flex;
+justify-content: space-between;
+align-items: center;
+max-width: 1600px;
+margin: 0 auto;
+position: relative;
+z-index: 1001;
+}
+.logo {
+font-family: 'Playfair Display', serif;
+font-size: 32px;
+font-weight: 700;
+letter-spacing: 4px;
+color: #ffffff;
+text-decoration: none;
+position: relative;
+}
+.logo::after {
+content: '';
+position: absolute;
+bottom: -5px;
+left: 0;
+width: 0;
+height: 2px;
+background: linear-gradient(90deg, transparent, rgba(255,255,255,0.5), transparent);
+transition: width 0.3s ease;
+}
+.logo:hover::after { width: 100%; }
+.hamburger {
+display: none;
+flex-direction: column;
+gap: 5px;
+cursor: pointer;
+padding: 10px;
+z-index: 1002;
+background: none;
+border: none;
+}
+.hamburger span {
+width: 28px;
+height: 3px;
+background: #ffffff;
+border-radius: 2px;
+transition: all 0.3s ease;
+}
+.hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(7px, 7px); }
+.hamburger.active span:nth-child(2) { opacity: 0; transform: translateX(-20px); }
+.hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(7px, -7px); }
+.nav-links { display: flex; gap: 50px; list-style: none; }
+.nav-links a {
+color: rgba(255, 255, 255, 0.85);
+text-decoration: none;
+font-size: 12px;
+text-transform: uppercase;
+letter-spacing: 2px;
+transition: all 0.3s;
+position: relative;
+padding: 5px 0;
+}
+.nav-links a::before {
+content: '';
+position: absolute;
+bottom: 0;
+left: 0;
+width: 0;
+height: 1px;
+background: #ffffff;
+transition: width 0.3s ease;
+}
+.nav-links a:hover { color: #ffffff; }
+.nav-links a:hover::before { width: 100%; }
+.nav-overlay {
+position: fixed;
+top: 0;
+left: 0;
+width: 100%;
+height: 100vh;
+background: rgba(0, 0, 0, 0.95);
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+gap: 30px;
+z-index: 999;
+opacity: 0;
+visibility: hidden;
+transition: all 0.4s ease;
+}
+.nav-overlay.active { opacity: 1; visibility: visible; }
+.nav-overlay a {
+color: rgba(255, 255, 255, 0.9);
+text-decoration: none;
+font-size: 24px;
+font-family: 'Playfair Display', serif;
+letter-spacing: 3px;
+text-transform: uppercase;
+transition: all 0.3s;
+}
+.nav-overlay a:hover { color: #ffffff; transform: scale(1.05); }
+/* Hero Section */
+.hero {
+margin-top: 80px;
+padding: 120px 60px 80px;
+text-align: center;
+position: relative;
+z-index: 2;
+min-height: 90vh;
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+}
+.hero h1 {
+font-family: 'Playfair Display', serif;
+font-size: 80px;
+margin-bottom: 20px;
+letter-spacing: 8px;
+font-weight: 400;
+animation: fadeInUp 1s ease;
+text-shadow: 0 4px 40px rgba(0,0,0,0.5);
+background: rgba(0,0,0,0.2);
+padding: 30px 50px;
+border-radius: 15px;
+}
+.hero p {
+font-size: 18px;
+color: rgba(255, 255, 255, 0.95);
+letter-spacing: 3px;
+animation: fadeInUp 1s ease 0.2s both;
+text-shadow: 0 2px 20px rgba(0,0,0,0.4);
+}
+.vape-hero {
+position: absolute;
+right: 10%;
+top: 50%;
+transform: translateY(-50%);
+width: 320px;
+max-width: 40vw;
+z-index: 1;
+animation: floatVape 6s ease-in-out infinite;
+filter: drop-shadow(0 20px 40px rgba(100, 100, 255, 0.3));
+}
+.vape-hero img {
+width: 100%;
+height: auto;
+border-radius: 20px;
+transition: transform 0.5s ease;
+}
+.vape-hero:hover img { transform: scale(1.03) rotate(1deg); }
+@keyframes floatVape {
+0%, 100% { transform: translateY(-50%) translateX(0) rotate(0deg); }
+25% { transform: translateY(-55%) translateX(5px) rotate(0.5deg); }
+50% { transform: translateY(-48%) translateX(-3px) rotate(-0.3deg); }
+75% { transform: translateY(-52%) translateX(2px) rotate(0.2deg); }
+}
+@keyframes fadeInUp {
+from { opacity: 0; transform: translateY(30px); }
+to { opacity: 1; transform: translateY(0); }
+}
+/* Products */
+.products {
+padding: 120px 60px;
+max-width: 1600px;
+margin: 0 auto;
+position: relative;
+z-index: 2;
+background: rgba(0,0,0,0.85);
+}
+.section-header {
+text-align: center;
+margin-bottom: 100px;
+position: relative;
+}
+.section-header::after {
+content: '';
+position: absolute;
+bottom: -20px;
+left: 50%;
+transform: translateX(-50%);
+width: 80px;
+height: 2px;
+background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+}
+.section-header h2 {
+font-family: 'Playfair Display', serif;
+font-size: 48px;
+letter-spacing: 6px;
+font-weight: 400;
+}
+.product-category {
+margin-bottom: 120px;
+padding: 40px;
+background: rgba(255,255,255,0.03);
+border-radius: 20px;
+border: 1px solid rgba(255, 255, 255, 0.08);
+transition: all 0.3s ease;
+}
+.product-category:hover {
+border-color: rgba(255, 255, 255, 0.15);
+box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+}
+.category-title {
+font-family: 'Playfair Display', serif;
+font-size: 36px;
+margin-bottom: 15px;
+letter-spacing: 4px;
+text-align: center;
+position: relative;
+display: inline-block;
+left: 50%;
+transform: translateX(-50%);
+}
+.category-title::after {
+content: '';
+position: absolute;
+bottom: -10px;
+left: 50%;
+transform: translateX(-50%);
+width: 40px;
+height: 2px;
+background: rgba(255, 255, 255, 0.3);
+}
+.category-specs {
+text-align: center;
+color: rgba(255, 255, 255, 0.6);
+font-size: 14px;
+margin-bottom: 40px;
+letter-spacing: 2px;
+}
+.flavors-grid {
+display: grid;
+grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+gap: 15px;
+margin-top: 40px;
+}
+.flavor-card {
+background: linear-gradient(180deg, rgba(255,255,255,0.06) 0%, rgba(255,255,255,0.03) 100%);
+border: 1px solid rgba(255, 255, 255, 0.12);
+border-radius: 12px;
+overflow: hidden;
+transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+cursor: pointer;
+position: relative;
+}
+.flavor-card::before {
+content: '';
+position: absolute;
+top: 0; left: 0; right: 0;
+height: 3px;
+background: linear-gradient(90deg, #6366f1, #8b5cf6, #6366f1);
+opacity: 0;
+transition: opacity 0.3s;
+}
+.flavor-card:hover {
+transform: translateY(-8px);
+border-color: rgba(255, 255, 255, 0.4);
+box-shadow: 0 15px 40px rgba(100, 100, 255, 0.2);
+}
+.flavor-card:hover::before { opacity: 1; }
+.flavor-image {
+width: 100%;
+height: 140px;
+background: rgba(255, 255, 255, 0.05);
+display: flex;
+align-items: center;
+justify-content: center;
+overflow: hidden;
+position: relative;
+}
+.flavor-image img {
+width: 100%;
+height: 100%;
+object-fit: cover;
+transition: transform 0.5s ease;
+}
+.flavor-card:hover .flavor-image img {
+transform: scale(1.1) rotate(1deg);
+}
+.flavor-info { padding: 12px 8px; text-align: center; }
+.flavor-name {
+font-size: 10px;
+letter-spacing: 0.5px;
+text-transform: uppercase;
+color: rgba(255, 255, 255, 0.9);
+font-weight: 500;
+line-height: 1.3;
+}
+.warning-section {
+background: rgba(255, 82, 82, 0.08);
+border: 1px solid rgba(255, 82, 82, 0.25);
+border-left: 4px solid #ff5252;
+padding: 40px 50px;
+text-align: center;
+margin: 100px auto;
+max-width: 900px;
+border-radius: 12px;
+}
+.warning-section h4 {
+font-size: 18px;
+margin-bottom: 15px;
+letter-spacing: 2px;
+color: #ff8a8a;
+}
+.warning-section p {
+color: rgba(255, 255, 255, 0.7);
+font-size: 13px;
+line-height: 1.6;
+}
+footer {
+background: rgba(255, 255, 255, 0.03);
+border-top: 1px solid rgba(255, 255, 255, 0.1);
+padding: 60px;
+text-align: center;
+position: relative;
+z-index: 2;
+}
+footer p {
+font-size: 11px;
+color: rgba(255, 255, 255, 0.4);
+letter-spacing: 2px;
+text-transform: uppercase;
+}
+.scroll-indicator {
+position: absolute;
+bottom: 40px;
+left: 50%;
+transform: translateX(-50%);
+display: flex;
+flex-direction: column;
+align-items: center;
+gap: 10px;
+z-index: 2;
+animation: bounce 2s infinite;
+}
+.scroll-indicator span {
+font-size: 10px;
+letter-spacing: 2px;
+text-transform: uppercase;
+color: rgba(255, 255, 255, 0.7);
+}
+.scroll-indicator .line {
+width: 1px;
+height: 40px;
+background: linear-gradient(180deg, rgba(255,255,255,0.7), transparent);
+}
+@keyframes bounce {
+0%, 20%, 50%, 80%, 100% { transform: translateX(-50%) translateY(0); }
+40% { transform: translateX(-50%) translateY(-15px); }
+60% { transform: translateX(-50%) translateY(-8px); }
+}
+@media (max-width: 1024px) {
+.vape-hero { width: 250px; right: 5%; }
+}
+@media (max-width: 768px) {
+header { padding: 15px 25px; }
+.logo { font-size: 26px; }
+.nav-links { display: none; }
+.hamburger { display: flex; }
+.hero {
+margin-top: 70px;
+padding: 100px 25px 60px;
+min-height: auto;
+}
+.hero h1 { 
+font-size: 48px; 
+letter-spacing: 4px;
+padding: 20px 30px;
+}
+.hero p { font-size: 14px; }
+.vape-hero {
+position: relative;
+right: auto;
+top: auto;
+transform: none;
+width: 200px;
+margin: 40px auto 0;
+}
+.products { padding: 60px 25px; }
+.section-header h2 { font-size: 36px; }
+.category-title { font-size: 26px; }
+.flavors-grid {
+grid-template-columns: repeat(auto-fill, minmax(95px, 1fr));
+gap: 12px;
+}
+.flavor-image { height: 120px; }
+.flavor-name { font-size: 9px; }
+.warning-section { padding: 30px 25px; margin: 60px 20px; }
+footer { padding: 40px 25px; }
+.scroll-indicator { display: none; }
 
-        body {
-            font-family: 'Inter', sans-serif;
-            background: #000000;
-            color: #ffffff;
-            overflow-x: hidden;
-        }
+/* Overlay MÁS OSCURO en móviles para mejor legibilidad */
+.video-overlay {
+background: linear-gradient(
+180deg,
+rgba(0,0,0,0.30) 0%,
+rgba(5,5,12,0.40) 40%,
+rgba(0,0,0,0.50) 100%
+);
+}
+}
 
-        header {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            background: rgba(0, 0, 0, 0.98);
-            backdrop-filter: blur(20px);
-            z-index: 1000;
-            padding: 25px 60px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-        }
+@media (max-width: 480px) {
+.hero h1 { font-size: 36px; padding: 15px 20px; }
+.vape-hero { width: 160px; }
+.flavors-grid { grid-template-columns: repeat(auto-fill, minmax(85px, 1fr)); }
+.flavor-image { height: 100px; }
+.product-category { padding: 25px 15px; }
 
-        nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            max-width: 1600px;
-            margin: 0 auto;
-        }
-
-        .logo {
-            font-family: 'Playfair Display', serif;
-            font-size: 32px;
-            font-weight: 700;
-            letter-spacing: 4px;
-            color: #ffffff;
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 50px;
-            list-style: none;
-        }
-
-        .nav-links a {
-            color: rgba(255, 255, 255, 0.7);
-            text-decoration: none;
-            font-size: 12px;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            transition: all 0.3s;
-        }
-
-        .nav-links a:hover {
-            color: #ffffff;
-        }
-
-        .hero {
-            margin-top: 80px;
-            padding: 150px 60px;
-            background: linear-gradient(180deg, #000000 0%, #0a0a0a 100%);
-            text-align: center;
-        }
-
-        .hero h1 {
-            font-family: 'Playfair Display', serif;
-            font-size: 80px;
-            margin-bottom: 20px;
-            letter-spacing: 8px;
-            font-weight: 400;
-        }
-
-        .hero p {
-            font-size: 16px;
-            color: rgba(255, 255, 255, 0.7);
-            letter-spacing: 2px;
-        }
-
-        .products {
-            padding: 120px 60px;
-            max-width: 1600px;
-            margin: 0 auto;
-        }
-
-        .section-header {
-            text-align: center;
-            margin-bottom: 100px;
-        }
-
-        .section-header h2 {
-            font-family: 'Playfair Display', serif;
-            font-size: 48px;
-            letter-spacing: 6px;
-            font-weight: 400;
-            margin-bottom: 20px;
-        }
-
-        .product-category {
-            margin-bottom: 120px;
-        }
-
-        .category-title {
-            font-family: 'Playfair Display', serif;
-            font-size: 36px;
-            margin-bottom: 20px;
-            letter-spacing: 4px;
-            text-align: center;
-        }
-
-        .category-specs {
-            text-align: center;
-            color: rgba(255, 255, 255, 0.5);
-            font-size: 14px;
-            margin-bottom: 40px;
-            letter-spacing: 2px;
-        }
-
-        .flavors-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
-            gap: 15px;
-            margin-top: 40px;
-        }
-
-        .flavor-card {
-            background: linear-gradient(180deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0.02) 100%);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 8px;
-            overflow: hidden;
-            transition: all 0.3s;
-            cursor: pointer;
-        }
-
-        .flavor-card:hover {
-            transform: translateY(-3px);
-            border-color: rgba(255, 255, 255, 0.3);
-            box-shadow: 0 8px 20px rgba(255, 255, 255, 0.1);
-        }
-
-        .flavor-image {
-            width: 100%;
-            height: 140px;
-            background: rgba(255, 255, 255, 0.05);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            overflow: hidden;
-        }
-
-        .flavor-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.3s;
-        }
-
-        .flavor-card:hover .flavor-image img {
-            transform: scale(1.05);
-        }
-
-        .flavor-info {
-            padding: 10px 8px;
-            text-align: center;
-        }
-
-        .flavor-name {
-            font-size: 10px;
-            letter-spacing: 0.5px;
-            text-transform: uppercase;
-            color: rgba(255, 255, 255, 0.9);
-            font-weight: 500;
-            line-height: 1.3;
-        }
-
-        .warning-section {
-            background: rgba(255, 255, 255, 0.02);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            padding: 50px;
-            text-align: center;
-            margin: 100px auto;
-            max-width: 900px;
-        }
-
-        .warning-section h4 {
-            font-size: 18px;
-            margin-bottom: 15px;
-            letter-spacing: 2px;
-        }
-
-        .warning-section p {
-            color: rgba(255, 255, 255, 0.6);
-            font-size: 13px;
-            line-height: 1.6;
-        }
-
-        footer {
-            background: rgba(255, 255, 255, 0.02);
-            border-top: 1px solid rgba(255, 255, 255, 0.08);
-            padding: 60px;
-            text-align: center;
-        }
-
-        footer p {
-            font-size: 11px;
-            color: rgba(255, 255, 255, 0.3);
-            letter-spacing: 2px;
-            text-transform: uppercase;
-        }
-
-        @media (max-width: 768px) {
-            header {
-                padding: 20px 30px;
-            }
-
-            .logo {
-                font-size: 24px;
-            }
-
-            .nav-links {
-                gap: 30px;
-            }
-
-            .hero {
-                margin-top: 70px;
-                padding: 100px 30px;
-            }
-
-            .hero h1 {
-                font-size: 48px;
-            }
-
-            .products {
-                padding: 80px 30px;
-            }
-
-            .section-header h2 {
-                font-size: 36px;
-            }
-
-            .category-title {
-                font-size: 28px;
-            }
-
-            .flavors-grid {
-                grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
-                gap: 12px;
-            }
-
-            .flavor-image {
-                height: 120px;
-            }
-
-            .flavor-name {
-                font-size: 9px;
-            }
-        }
-    </style>
+/* Overlay aún más oscuro en pantallas muy pequeñas */
+.video-overlay {
+background: linear-gradient(
+180deg,
+rgba(0,0,0,0.35) 0%,
+rgba(5,5,12,0.45) 40%,
+rgba(0,0,0,0.55) 100%
+);
+}
+}
+</style>
 </head>
 <body>
-    <header>
-        <nav>
-            <div class="logo">VAPE ELITE</div>
-            <ul class="nav-links">
-                <li><a href="#inicio">Inicio</a></li>
-                <li><a href="#productos">Productos</a></li>
-                <li><a href="#contacto">Contacto</a></li>
-            </ul>
-        </nav>
-    </header>
-
-    <section class="hero" id="inicio">
-        <h1>EXCELENCIA</h1>
-        <p>Colección Exclusiva de Productos Premium</p>
-    </section>
-
-    <section class="products" id="productos">
-        <div class="section-header">
-            <h2>COLECCIÓN</h2>
-        </div>
-
-        <!-- LIFE POD ECO II -->
-        <div class="product-category">
-            <h3 class="category-title">LIFE POD ECO II</h3>
-            <p class="category-specs">36 Sabores • 10,000 Puffs</p>
-            <div class="flavors-grid">
-                <div class="flavor-card"><div class="flavor-image"><img src="https://images.rappi.pe/products/1726547319276_1726547317135_1726547316411.png?d=900x750&e=webp&q=30" alt="Menthol"></div><div class="flavor-info"><div class="flavor-name">Menthol</div></div></div>
-                <div class="flavor-card"><div class="flavor-image"><img src="https://calvapetienda.com/wp-content/uploads/2025/09/LIFE-POD-10.000-MONSTER-DRINK.webp" alt="Monster Drink"></div><div class="flavor-info"><div class="flavor-name">Monster Drink</div></div></div>
-                <div class="flavor-card"><div class="flavor-image"><img src="http://nosmoking.com.py/wp-content/uploads/2025/06/REFIL-10K-BLACKBERRY-ICE-600x600-1.png" alt="BlackBerry Ice"></div><div class="flavor-info"><div class="flavor-name">BlackBerry Ice</div></div></div>
-                <div class="flavor-card"><div class="flavor-image"><img src="https://calvapetienda.com/wp-content/uploads/2025/09/LIFE-POD-10.000-LOVE-66.webp" alt="Love 66"></div><div class="flavor-info"><div class="flavor-name">Love 66</div></div></div>
-                <div class="flavor-card"><div class="flavor-image"><img src="https://i.postimg.cc/PrSWJsfr/ORA.jpg" alt="Blueberry Strawberry"></div><div class="flavor-info"><div class="flavor-name">Blueberry Strawberry</div></div></div>
-                <div class="flavor-card"><div class="flavor-image"><img src="https://i.postimg.cc/zfC3LKw0/MANGO.jpg" alt="Passion Mango Ice"></div><div class="flavor-info"><div class="flavor-name">Passion Mango Ice</div></div></div>
-                <div class="flavor-card"><div class="flavor-image"><img src="https://i.postimg.cc/K8L8VBHH/MANGO-23.jpg" alt="Passion Fruit Ice"></div><div class="flavor-info"><div class="flavor-name">Passion Fruit Ice</div></div></div>
-                <div class="flavor-card"><div class="flavor-image"><img src="https://liquidin.pe/cdn/shop/files/LF31.png?v=1738619964&width=990" alt="Clear"></div><div class="flavor-info"><div class="flavor-name">Clear</div></div></div>
-                <div class="flavor-card"><div class="flavor-image"><img src="https://liquidin.pe/cdn/shop/files/LF32.png?v=1752259822&width=990" alt="Red Orange"></div><div class="flavor-info"><div class="flavor-name">Red Orange</div></div></div>
-                <div class="flavor-card"><div class="flavor-image"><img src="https://i.postimg.cc/90Vkm5mN/123.jpg" alt="Peach Mango"></div><div class="flavor-info"><div class="flavor-name">Peach Mango</div></div></div>
-                <div class="flavor-card"><div class="flavor-image"><img src="https://liquidin.pe/cdn/shop/files/LF29.png?v=1738619600&width=990" alt="Cranberry Soda"></div><div class="flavor-info"><div class="flavor-name">Cranberry Soda</div></div></div>
-                <div class="flavor-card"><div class="flavor-image"><img src="https://calvapetienda.com/wp-content/uploads/2025/09/LIFE-POD-10.000-CHERRY-LIME-ICE.webp" alt="Cherry Lime"></div><div class="flavor-info"><div class="flavor-name">Cherry Lime</div></div></div>
-                <div class="flavor-card"><div class="flavor-image"><img src="https://liquidin.pe/cdn/shop/files/LF03.png?v=1738631488&width=990" alt="Coconut Water Ice"></div><div class="flavor-info"><div class="flavor-name">Coconut Water Ice</div></div></div>
-                <div class="flavor-card"><div class="flavor-image"><img src="https://calvapetienda.com/wp-content/uploads/2025/08/LIFE-POD-10.000-WATERMELON-ICE.webp" alt="Watermelon Ice"></div><div class="flavor-info"><div class="flavor-name">Watermelon Ice</div></div></div>
-                <div class="flavor-card"><div class="flavor-image"><img src="https://calvapetienda.com/wp-content/uploads/2026/02/LIFE-POD-10.000-BANANA-ICE.webp" alt="Banana Ice"></div><div class="flavor-info"><div class="flavor-name">Banana Ice</div></div></div>
-                <div class="flavor-card"><div class="flavor-image"><img src="https://i.postimg.cc/g2dVkV67/tienda-023956-2e39f6fd81eb910fee9f27c5289584af4bba87a2-producto-large-100.webp" alt="Summer Love"></div><div class="flavor-info"><div class="flavor-name">Summer Love</div></div></div>
-                <div class="flavor-card"><div class="flavor-image"><img src="https://i.postimg.cc/FF3kdfmf/d1233.jpg" alt="Mint Waterberry"></div><div class="flavor-info"><div class="flavor-name">Mint Waterberry</div></div></div>
-                <div class="flavor-card"><div class="flavor-image"><img src="https://nosmoking.com.py/wp-content/uploads/2025/06/REFIL-10K-BLUEBERRY-MINT.png" alt="Blueberry Mint"></div><div class="flavor-info"><div class="flavor-name">Blueberry Mint</div></div></div>
-                <div class="flavor-card"><div class="flavor-image"><img src="https://liquidin.pe/cdn/shop/files/LF30_9b79f36a-068c-4ddc-9d55-38958f19ad87.png?v=1757452979&width=990" alt="Blue Strawberry Cake"></div><div class="flavor-info"><div class="flavor-name">Blue Strawberry Cake</div></div></div>
-                <div class="flavor-card"><div class="flavor-image"><img src="https://liquidin.pe/cdn/shop/files/LF06.png?v=1738610677&width=990" alt="Green Grape Ice"></div><div class="flavor-info"><div class="flavor-name">Green Grape Ice</div></div></div>
-                <div class="flavor-card"><div class="flavor-image"><img src="https://www.indyperuvapes.pe/cdn/shop/files/4fdcdd77-f040-4813-a4a1-fc23690546ac_11zon.webp?v=1758238303" alt="Strawberry Kiwi Ice"></div><div class="flavor-info"><div class="flavor-name">Strawberry Kiwi Ice</div></div></div>
-                <div class="flavor-card"><div class="flavor-image"><img src="https://www.indyperuvapes.pe/cdn/shop/files/789300241121-_1.webp?v=1746221576" alt="Grape Honey"></div><div class="flavor-info"><div class="flavor-name">Grape Honey</div></div></div>
-                <div class="flavor-card"><div class="flavor-image"><img src="https://lifepodbrasil.com/wp-content/uploads/2025/05/REFIL-10K-KIWI-BERRY.png" alt="Kiwi Berry"></div><div class="flavor-info"><div class="flavor-name">Kiwi Berry</div></div></div>
-                <div class="flavor-card"><div class="flavor-image"><img src="https://i.postimg.cc/FRM4jsyc/image1bitay76gxwlzu5dhix.webp" alt="Cranberry Cake"></div><div class="flavor-info"><div class="flavor-name">Cranberry Cake</div></div></div>
-                <div class="flavor-card"><div class="flavor-image"><img src="https://nosmoking.com.py/wp-content/uploads/2025/06/REFIL-10K-PEACH-ORANGE-1.png" alt="Banana Custard"></div><div class="flavor-info"><div class="flavor-name">Banana Custard</div></div></div>
-                <div class="flavor-card"><div class="flavor-image"><img src="https://i.postimg.cc/T3w43vbF/tienda-023956-373ed6af2e76851a03da2465ecc0d6873a99459b-producto-large-100.webp" alt="Pink Lemonade"></div><div class="flavor-info"><div class="flavor-name">Pink Lemonade</div></div></div>
-                <div class="flavor-card"><div class="flavor-image"><img src="https://calvapetienda.com/wp-content/uploads/2025/08/LIFE-POD-10.000-STRAWBERRY-WATERMELON-ICE.webp" alt="Strawberry Watermelon"></div><div class="flavor-info"><div class="flavor-name">Strawberry Watermelon</div></div></div>
-                <div class="flavor-card"><div class="flavor-image"><img src="https://i.postimg.cc/qM836NsK/tienda-023956-9d7afd3f3a14db20f27157d3fafa89bcbb8ccc9f-producto-medium-100.webp" alt="Grape Ice"></div><div class="flavor-info"><div class="flavor-name">Grape Ice</div></div></div>
-                <div class="flavor-card"><div class="flavor-image"><img src="https://i.postimg.cc/44vfzV0g/23232.jpg" alt="Polar Ice"></div><div class="flavor-info"><div class="flavor-name">Polar Ice</div></div></div>
-                <div class="flavor-card"><div class="flavor-image"><img src="https://lh3.googleusercontent.com/proxy/VQ-2tpuQUTtx7HGQbi39CXNk7lXbjPVb1EbFKgvflcvn0WPrOwM2sj_aRG-IzTnI5r-qEwgkXjHGhHcYcwoNmjm-9i9yMTsV8aE" alt="Strong Apple"></div><div class="flavor-info"><div class="flavor-name">Strong Apple</div></div></div>
-                <div class="flavor-card"><div class="flavor-image"><img src="https://lifepodbrasil.com/wp-content/uploads/2025/05/REFIL-10K-CAPUCCINO.png" alt="Cappuccino"></div><div class="flavor-info"><div class="flavor-name">Cappuccino</div></div></div>
-                <div class="flavor-card"><div class="flavor-image"><img src="https://mundovape.net/wp-content/uploads/2024/09/Peach-Orange-10k.webp" alt="Peach Orange"></div><div class="flavor-info"><div class="flavor-name">Peach Orange</div></div></div>
-                <div class="flavor-card"><div class="flavor-image"><img src="https://calvapetienda.com/wp-content/uploads/2025/09/LIFE-POD-10.000-WHITE-MOCHA.webp" alt="White Mocca Ice"></div><div class="flavor-info"><div class="flavor-name">White Mocca Ice</div></div></div>
-                <div class="flavor-card"><div class="flavor-image"><img src="https://i.postimg.cc/ydkf7mSv/1235.jpg" alt="Dragon Blue Razz"></div><div class="flavor-info"><div class="flavor-name">Dragon Blue Razz</div></div></div>
-                <div class="flavor-card"><div class="flavor-image"><img src="https://i.postimg.cc/8z4wWKRK/azuas.jpg" alt="Blue Razz Ice"></div><div class="flavor-info"><div class="flavor-name">Blue Razz Ice</div></div></div>
-                <div class="flavor-card"><div class="flavor-image"><img src="https://images.rappi.pe/products/1726547387854_1726547385795_1726547385089.png?d=900x750&e=webp&q=30" alt="Miami Mint"></div><div class="flavor-info"><div class="flavor-name">Miami Mint</div></div></div>
-                <div class="flavor-card"><div class="flavor-image"><img src="https://i.postimg.cc/PqLZx22D/dragon123.jpg" alt="Dragon Fruit Ice"></div><div class="flavor-info"><div class="flavor-name">Dragon Fruit Ice</div></div></div>
-                <div class="flavor-card"><div class="flavor-image"><img src="https://domun.co/default/image-tool-lambda?new-width=700&new-height=700&new-quality=80&url-image=https%3A%2F%2Fsumerlabs.com%2Fprod%2Fcatalogue%2F5e9288d3d218974f65177a8fc36b5cfba3ef4bca%2Fimage1wmaakrmv33lwqmz1fx.png" alt="Tobacco Virginia"></div><div class="flavor-info"><div class="flavor-name">Tobacco Virginia</div></div></div>
-                <div class="flavor-card"><div class="flavor-image"><img src="https://liquidin.pe/cdn/shop/files/LF24.png?v=1738630166&width=990" alt="Green Apple Ice"></div><div class="flavor-info"><div class="flavor-name">Green Apple Ice</div></div></div>
-                <div class="flavor-card"><div class="flavor-image"><img src="https://tabernadelvapeador.pe/cdn/shop/files/789300241275_e96c6b24-3b9a-400a-ae28-5ea0ad2b951c.jpg?v=1748043837&width=990" alt="Watermelon Peach"></div><div class="flavor-info"><div class="flavor-name">Watermelon Peach</div></div></div>
-                <div class="flavor-card"><div class="flavor-image"><img src="https://buscaparaguai.com.br/thumb/thumb.php?src=%2Foriginal%2Fuploads%2FJPG%2F2024%2F08%2F20%2FSADENE_1724132385.jpg&w=1024&h=768" alt="Candy Ice"></div><div class="flavor-info"><div class="flavor-name">Candy Ice</div></div></div>
-            </div>
-        </div>
-
-        <!-- STLTH LOOP 9K -->
-        <div class="product-category">
-            <h3 class="category-title">STLTH LOOP 9K</h3>
-            <p class="category-specs">17mL • 20mg/mL o 50mg/mL • ~9,000 Puffs</p>
-            <div class="flavors-grid">
-                <div class="flavor-card"><div class="flavor-image"><img src="https://i.postimg.cc/N0kWFMHt/dfbn234.jpg" alt="White Grape Ice"></div><div class="flavor-info"><div class="flavor-name">White Grape Ice</div></div></div>
-                <div class="flavor-card"><div class="flavor-image"><img src="https://i.postimg.cc/zGnQ2Bps/hg.png" alt="Blue Lemons"></div><div class="flavor-info"><div class="flavor-name">Blue Lemons</div></div></div>
-                <div class="flavor-card"><div class="flavor-image"><img src="https://i.postimg.cc/PrdKf4M4/g2134.png" alt="Pineapple Orange"></div><div class="flavor-info"><div class="flavor-name">Pineapple Orange</div></div></div>
-                <div class="flavor-card"><div class="flavor-image"><img src="https://i.postimg.cc/d331ngYG/tropical.png" alt="Tropical Storm Ice"></div><div class="flavor-info"><div class="flavor-name">Tropical Storm Ice</div></div></div>
-                <div class="flavor-card"><div class="flavor-image"><img src="https://i.postimg.cc/d1vZRW3d/jmnaa.png" alt="Hawaiian Mist Ice"></div><div class="flavor-info"><div class="flavor-name">Hawaiian Mist Ice</div></div></div>
-                <div class="flavor-card"><div class="flavor-image"><img src="https://i.postimg.cc/SND0mjc9/443f.png" alt="White Grape"></div><div class="flavor-info"><div class="flavor-name">White Grape</div></div></div>
-                <div class="flavor-card"><div class="flavor-image"><img src="https://i.postimg.cc/4xqS3cyn/1.png" alt="Honeydew Mango Ice"></div><div class="flavor-info"><div class="flavor-name">Honeydew Mango Ice</div></div></div>
-            </div>
-        </div>
-
-        <!-- STLTH LOOP 12K -->
-        <div class="product-category">
-            <h3 class="category-title">STLTH LOOP 12K</h3>
-            <p class="category-specs">17mL • 20mg/mL o 50mg/mL • ~12,000 Puffs</p>
-            <div class="flavors-grid">
-                <div class="flavor-card"><div class="flavor-image"><img src="https://i.postimg.cc/rpGNLRtN/fsddf.png" alt="Hawaiian Mist Ice"></div><div class="flavor-info"><div class="flavor-name">Hawaiian Mist Ice</div></div></div>
-                <div class="flavor-card"><div class="flavor-image"><img src="https://i.postimg.cc/PqmJ3m8Z/GSDG12.png" alt="Strawberry Lime Ice"></div><div class="flavor-info"><div class="flavor-name">Strawberry Lime Ice</div></div></div>
-                <div class="flavor-card"><div class="flavor-image"><img src="https://i.postimg.cc/8CBkBNqT/31231.png" alt="Coconut Razz Ice"></div><div class="flavor-info"><div class="flavor-name">Coconut Razz Ice</div></div></div>
-            </div>
-        </div>
-
-        <!-- STLTH LOOP 15K -->
-        <div class="product-category">
-            <h3 class="category-title">STLTH LOOP 15K</h3>
-            <p class="category-specs">18mL • 20mg/mL o 50mg/mL • ~15,000 Puffs</p>
-            <div class="flavors-grid">
-                <div class="flavor-card"><div class="flavor-image"><img src="https://i.postimg.cc/P5KTP2Z3/vv123.jpg" alt="Watermelon Lime Ice & Strawberry Lime Ice"></div><div class="flavor-info"><div class="flavor-name">Watermelon Lime Ice & Strawberry Lime Ice</div></div></div>
-                <div class="flavor-card"><div class="flavor-image"><img src="https://i.postimg.cc/fbJnkZMD/Captura-de-pantalla-2026-03-02-221840.jpg" alt="Classic Ice & Dry Ice"></div><div class="flavor-info"><div class="flavor-name">Classic Ice & Dry Ice</div></div></div>
-                <div class="flavor-card"><div class="flavor-image"><img src="https://i.postimg.cc/9FpvpzM3/v123123.jpg" alt="Strawberry Kiwi Ice & Mango Ice"></div><div class="flavor-info"><div class="flavor-name">Strawberry Kiwi Ice & Mango Ice</div></div></div>
-                <div class="flavor-card"><div class="flavor-image"><img src="https://i.postimg.cc/BnbwBgkg/Captura-de-pantalla-2026-03-02-222108.jpg" alt="Peppermint & Spearmint"></div><div class="flavor-info"><div class="flavor-name">Peppermint & Spearmint</div></div></div>
-                <div class="flavor-card"><div class="flavor-image"><img src="https://i.postimg.cc/K85vtZXY/b123.jpg" alt="Green Apple Ice & White Grape Ice"></div><div class="flavor-info"><div class="flavor-name">Green Apple Ice & White Grape Ice</div></div></div>
-            </div>
-        </div>
-
-        <!-- VICE LOOP -->
-        <div class="product-category">
-            <h3 class="category-title">VICE LOOP</h3>
-            <p class="category-specs">10mL • 20mg/mL • ~5,000 Puffs</p>
-            <div class="flavors-grid">
-                <div class="flavor-card"><div class="flavor-image"><img src="https://i.postimg.cc/V6z3sdc8/Captura-de-pantalla-2026-03-02-145413.jpg" alt="Island Splash Ice"></div><div class="flavor-info"><div class="flavor-name">Island Splash Ice</div></div></div>
-                <div class="flavor-card"><div class="flavor-image"><img src="https://i.postimg.cc/6qrRJDSs/prsio.jpg" alt="Prism Ice"></div><div class="flavor-info"><div class="flavor-name">Prism Ice</div></div></div>
-                <div class="flavor-card"><div class="flavor-image"><img src="https://i.postimg.cc/qR7jZnTZ/44234.jpg" alt="Nana Berry Ice"></div><div class="flavor-info"><div class="flavor-name">Nana Berry Ice</div></div></div>
-                <div class="flavor-card"><div class="flavor-image"><img src="https://i.postimg.cc/xTXB1wBN/as.jpg" alt="Hawaiian Ice"></div><div class="flavor-info"><div class="flavor-name">Hawaiian Ice</div></div></div>
-                <div class="flavor-card"><div class="flavor-image"><img src="https://i.postimg.cc/g01md1y3/Captura-de-pantalla-2026-03-02-205347.jpg" alt="Green Burst"></div><div class="flavor-info"><div class="flavor-name">Green Burst</div></div></div>
-                <div class="flavor-card"><div class="flavor-image"><img src="https://i.postimg.cc/L526pHx3/123123.jpg" alt="Straw Kiwi Ice"></div><div class="flavor-info"><div class="flavor-name">Straw Kiwi Ice</div></div></div>
-                <div class="flavor-card"><div class="flavor-image"><img src="https://i.postimg.cc/rwmk4qQK/1.jpg" alt="Blue Cherry Ice"></div><div class="flavor-info"><div class="flavor-name">Blue Cherry Ice</div></div></div>
-                <div class="flavor-card"><div class="flavor-image"><img src="https://i.postimg.cc/Cx300h1q/asd123.jpg" alt="Misty Mango Ice"></div><div class="flavor-info"><div class="flavor-name">Misty Mango Ice</div></div></div>
-                <div class="flavor-card"><div class="flavor-image"><img src="https://i.postimg.cc/dV8CvX0z/Captura-de-pantalla-2026-03-02-144342.jpg" alt="White Grape Ice"></div><div class="flavor-info"><div class="flavor-name">White Grape Ice</div></div></div>
-                <div class="flavor-card"><div class="flavor-image"><img src="https://i.postimg.cc/bJRCLtw5/Captura-de-pantalla-2026-03-02-205948.jpg" alt="Dragon Berry Mango Ice"></div><div class="flavor-info"><div class="flavor-name">Dragon Berry Mango Ice</div></div></div>
-                <div class="flavor-card"><div class="flavor-image"><img src="https://i.postimg.cc/W41G2vfC/Captura-de-pantalla-2026-03-02-144648.jpg" alt="Green Apple Ice"></div><div class="flavor-info"><div class="flavor-name">Green Apple Ice</div></div></div>
-                <div class="flavor-card"><div class="flavor-image"><img src="https://i.postimg.cc/JzBpvghD/Captura-de-pantalla-2026-03-02-210110.jpg" alt="Juicy Peach Ice"></div><div class="flavor-info"><div class="flavor-name">Juicy Peach Ice</div></div></div>
-                <div class="flavor-card"><div class="flavor-image"><img src="https://i.postimg.cc/g2qMq7k1/asd123123.jpg" alt="Lemon Blue Razz Ice"></div><div class="flavor-info"><div class="flavor-name">Lemon Blue Razz Ice</div></div></div>
-                <div class="flavor-card"><div class="flavor-image"><img src="https://i.postimg.cc/SRsrr15s/Captura-de-pantalla-2026-03-02-210209.jpg" alt="Mint Punch Ice"></div><div class="flavor-info"><div class="flavor-name">Mint Punch Ice</div></div></div>
-                <div class="flavor-card"><div class="flavor-image"><img src="https://i.postimg.cc/ZnS05P5d/Captura-de-pantalla-2026-03-02-144928.jpg" alt="Apple Kiwi Melon"></div><div class="flavor-info"><div class="flavor-name">Apple Kiwi Melon</div></div></div>
-                <div class="flavor-card"><div class="flavor-image"><img src="https://i.postimg.cc/GhbTTgVY/Captura-de-pantalla-2026-03-02-211255.jpg" alt="Strawberry Kiwi Ice"></div><div class="flavor-info"><div class="flavor-name">Strawberry Kiwi Ice</div></div></div>
-                <div class="flavor-card"><div class="flavor-image"><img src="https://i.postimg.cc/sDGPgWRF/as123.jpg" alt="Mango Ice"></div><div class="flavor-info"><div class="flavor-name">Mango Ice</div></div></div>
-                <div class="flavor-card"><div class="flavor-image"><img src="https://i.postimg.cc/Xv5Yz9tV/pinas1.jpg" alt="Strawberry Banana Pineapple Ice"></div><div class="flavor-info"><div class="flavor-name">Strawberry Banana Pineapple Ice</div></div></div>
-                <div class="flavor-card"><div class="flavor-image"><img src="https://i.postimg.cc/g2bPM1yL/123sdfg.jpg" alt="Mint Ice"></div><div class="flavor-info"><div class="flavor-name">Mint Ice</div></div></div>
-            </div>
-        </div>
-
-        <div class="warning-section">
-            <h4>⚠️ ADVERTENCIA</h4>
-            <p>La nicotina es altamente adictiva. Producto prohibido para menores de edad.</p>
-        </div>
-    </section>
-
-    <footer id="contacto">
-        <p>&copy; 2024 Vape Elite. Todos los derechos reservados.</p>
-    </footer>
+<!-- 🎬 VIMEO BACKGROUND VIDEO - SE REPRODUCE EN TODOS LOS DISPOSITIVOS -->
+<div class="vimeo-background" id="vimeoBg">
+<iframe 
+src="https://player.vimeo.com/video/1169818034?background=1&autoplay=1&loop=1&muted=1&title=0&byline=0&portrait=0&controls=0&transparent=0"
+frameborder="0"
+allow="autoplay; fullscreen; picture-in-picture"
+allowfullscreen
+loading="lazy"
+title="Vape Elite Background">
+</iframe>
+</div>
+<!-- Overlay adaptable - más oscuro en móviles -->
+<div class="video-overlay"></div>
+<header id="header">
+<nav>
+<a href="#inicio" class="logo">VAPE ELITE</a>
+<ul class="nav-links">
+<li><a href="#inicio">Inicio</a></li>
+<li><a href="#productos">Productos</a></li>
+<li><a href="#contacto">Contacto</a></li>
+</ul>
+<button class="hamburger" id="hamburger" aria-label="Menú">
+<span></span><span></span><span></span>
+</button>
+</nav>
+</header>
+<div class="nav-overlay" id="navOverlay">
+<a href="#inicio" class="nav-link-mobile">Inicio</a>
+<a href="#productos" class="nav-link-mobile">Productos</a>
+<a href="#contacto" class="nav-link-mobile">Contacto</a>
+</div>
+<section class="hero" id="inicio">
+<h1>EXCELENCIA</h1>
+<p>Colección Exclusiva de Productos Premium</p>
+<div class="vape-hero">
+<img src="" alt="Vape Premium"
+onerror="this.src='https://via.placeholder.com/320x400/1a1a2e/ffffff?text=VAPE+ELITE'">
+</div>
+<div class="scroll-indicator">
+<span>Explorar</span>
+<div class="line"></div>
+</div>
+</section>
+<section class="products" id="productos">
+<div class="section-header">
+<h2>COLECCIÓN</h2>
+</div>
+<!-- LIFE POD ECO II -->
+<div class="product-category">
+<h3 class="category-title">LIFE POD ECO II</h3>
+<p class="category-specs">36 Sabores • 10,000 Puffs</p>
+<div class="flavors-grid">
+<div class="flavor-card"><div class="flavor-image"><img src="https://images.rappi.pe/products/1726547319276_1726547317135_1726547316411.png?d=900x750&e=webp&q=30" alt="Menthol"></div><div class="flavor-info"><div class="flavor-name">Menthol</div></div></div>
+<div class="flavor-card"><div class="flavor-image"><img src="https://calvapetienda.com/wp-content/uploads/2025/09/LIFE-POD-10.000-MONSTER-DRINK.webp" alt="Monster Drink"></div><div class="flavor-info"><div class="flavor-name">Monster Drink</div></div></div>
+<div class="flavor-card"><div class="flavor-image"><img src="http://nosmoking.com.py/wp-content/uploads/2025/06/REFIL-10K-BLACKBERRY-ICE-600x600-1.png" alt="BlackBerry Ice"></div><div class="flavor-info"><div class="flavor-name">BlackBerry Ice</div></div></div>
+<div class="flavor-card"><div class="flavor-image"><img src="https://calvapetienda.com/wp-content/uploads/2025/09/LIFE-POD-10.000-LOVE-66.webp" alt="Love 66"></div><div class="flavor-info"><div class="flavor-name">Love 66</div></div></div>
+<div class="flavor-card"><div class="flavor-image"><img src="https://i.postimg.cc/PrSWJsfr/ORA.jpg" alt="Blueberry Strawberry"></div><div class="flavor-info"><div class="flavor-name">Blueberry Strawberry</div></div></div>
+<div class="flavor-card"><div class="flavor-image"><img src="https://i.postimg.cc/zfC3LKw0/MANGO.jpg" alt="Passion Mango Ice"></div><div class="flavor-info"><div class="flavor-name">Passion Mango Ice</div></div></div>
+<div class="flavor-card"><div class="flavor-image"><img src="https://i.postimg.cc/K8L8VBHH/MANGO-23.jpg" alt="Passion Fruit Ice"></div><div class="flavor-info"><div class="flavor-name">Passion Fruit Ice</div></div></div>
+<div class="flavor-card"><div class="flavor-image"><img src="https://liquidin.pe/cdn/shop/files/LF31.png?v=1738619964&width=990" alt="Clear"></div><div class="flavor-info"><div class="flavor-name">Clear</div></div></div>
+<div class="flavor-card"><div class="flavor-image"><img src="https://liquidin.pe/cdn/shop/files/LF32.png?v=1752259822&width=990" alt="Red Orange"></div><div class="flavor-info"><div class="flavor-name">Red Orange</div></div></div>
+<div class="flavor-card"><div class="flavor-image"><img src="https://i.postimg.cc/90Vkm5mN/123.jpg" alt="Peach Mango"></div><div class="flavor-info"><div class="flavor-name">Peach Mango</div></div></div>
+<div class="flavor-card"><div class="flavor-image"><img src="https://liquidin.pe/cdn/shop/files/LF29.png?v=1738619600&width=990" alt="Cranberry Soda"></div><div class="flavor-info"><div class="flavor-name">Cranberry Soda</div></div></div>
+<div class="flavor-card"><div class="flavor-image"><img src="https://calvapetienda.com/wp-content/uploads/2025/09/LIFE-POD-10.000-CHERRY-LIME-ICE.webp" alt="Cherry Lime"></div><div class="flavor-info"><div class="flavor-name">Cherry Lime</div></div></div>
+<div class="flavor-card"><div class="flavor-image"><img src="https://liquidin.pe/cdn/shop/files/LF03.png?v=1738631488&width=990" alt="Coconut Water Ice"></div><div class="flavor-info"><div class="flavor-name">Coconut Water Ice</div></div></div>
+<div class="flavor-card"><div class="flavor-image"><img src="https://calvapetienda.com/wp-content/uploads/2025/08/LIFE-POD-10.000-WATERMELON-ICE.webp" alt="Watermelon Ice"></div><div class="flavor-info"><div class="flavor-name">Watermelon Ice</div></div></div>
+<div class="flavor-card"><div class="flavor-image"><img src="https://calvapetienda.com/wp-content/uploads/2026/02/LIFE-POD-10.000-BANANA-ICE.webp" alt="Banana Ice"></div><div class="flavor-info"><div class="flavor-name">Banana Ice</div></div></div>
+<div class="flavor-card"><div class="flavor-image"><img src="https://i.postimg.cc/g2dVkV67/tienda-023956-2e39f6fd81eb910fee9f27c5289584af4bba87a2-producto-large-100.webp" alt="Summer Love"></div><div class="flavor-info"><div class="flavor-name">Summer Love</div></div></div>
+<div class="flavor-card"><div class="flavor-image"><img src="https://i.postimg.cc/FF3kdfmf/d1233.jpg" alt="Mint Waterberry"></div><div class="flavor-info"><div class="flavor-name">Mint Waterberry</div></div></div>
+<div class="flavor-card"><div class="flavor-image"><img src="https://nosmoking.com.py/wp-content/uploads/2025/06/REFIL-10K-BLUEBERRY-MINT.png" alt="Blueberry Mint"></div><div class="flavor-info"><div class="flavor-name">Blueberry Mint</div></div></div>
+<div class="flavor-card"><div class="flavor-image"><img src="https://liquidin.pe/cdn/shop/files/LF30_9b79f36a-068c-4ddc-9d55-38958f19ad87.png?v=1757452979&width=990" alt="Blue Strawberry Cake"></div><div class="flavor-info"><div class="flavor-name">Blue Strawberry Cake</div></div></div>
+<div class="flavor-card"><div class="flavor-image"><img src="https://liquidin.pe/cdn/shop/files/LF06.png?v=1738610677&width=990" alt="Green Grape Ice"></div><div class="flavor-info"><div class="flavor-name">Green Grape Ice</div></div></div>
+<div class="flavor-card"><div class="flavor-image"><img src="https://www.indyperuvapes.pe/cdn/shop/files/4fdcdd77-f040-4813-a4a1-fc23690546ac_11zon.webp?v=1758238303" alt="Strawberry Kiwi Ice"></div><div class="flavor-info"><div class="flavor-name">Strawberry Kiwi Ice</div></div></div>
+<div class="flavor-card"><div class="flavor-image"><img src="https://www.indyperuvapes.pe/cdn/shop/files/789300241121-_1.webp?v=1746221576" alt="Grape Honey"></div><div class="flavor-info"><div class="flavor-name">Grape Honey</div></div></div>
+<div class="flavor-card"><div class="flavor-image"><img src="https://lifepodbrasil.com/wp-content/uploads/2025/05/REFIL-10K-KIWI-BERRY.png" alt="Kiwi Berry"></div><div class="flavor-info"><div class="flavor-name">Kiwi Berry</div></div></div>
+<div class="flavor-card"><div class="flavor-image"><img src="https://i.postimg.cc/FRM4jsyc/image1bitay76gxwlzu5dhix.webp" alt="Cranberry Cake"></div><div class="flavor-info"><div class="flavor-name">Cranberry Cake</div></div></div>
+<div class="flavor-card"><div class="flavor-image"><img src="https://nosmoking.com.py/wp-content/uploads/2025/06/REFIL-10K-PEACH-ORANGE-1.png" alt="Banana Custard"></div><div class="flavor-info"><div class="flavor-name">Banana Custard</div></div></div>
+<div class="flavor-card"><div class="flavor-image"><img src="https://i.postimg.cc/T3w43vbF/tienda-023956-373ed6af2e76851a03da2465ecc0d6873a99459b-producto-large-100.webp" alt="Pink Lemonade"></div><div class="flavor-info"><div class="flavor-name">Pink Lemonade</div></div></div>
+<div class="flavor-card"><div class="flavor-image"><img src="https://calvapetienda.com/wp-content/uploads/2025/08/LIFE-POD-10.000-STRAWBERRY-WATERMELON-ICE.webp" alt="Strawberry Watermelon"></div><div class="flavor-info"><div class="flavor-name">Strawberry Watermelon</div></div></div>
+<div class="flavor-card"><div class="flavor-image"><img src="https://i.postimg.cc/qM836NsK/tienda-023956-9d7afd3f3a14db20f27157d3fafa89bcbb8ccc9f-producto-medium-100.webp" alt="Grape Ice"></div><div class="flavor-info"><div class="flavor-name">Grape Ice</div></div></div>
+<div class="flavor-card"><div class="flavor-image"><img src="https://i.postimg.cc/44vfzV0g/23232.jpg" alt="Polar Ice"></div><div class="flavor-info"><div class="flavor-name">Polar Ice</div></div></div>
+<div class="flavor-card"><div class="flavor-image"><img src="https://lh3.googleusercontent.com/proxy/VQ-2tpuQUTtx7HGQbi39CXNk7lXbjPVb1EbFKgvflcvn0WPrOwM2sj_aRG-IzTnI5r-qEwgkXjHGhHcYcwoNmjm-9i9yMTsV8aE" alt="Strong Apple"></div><div class="flavor-info"><div class="flavor-name">Strong Apple</div></div></div>
+<div class="flavor-card"><div class="flavor-image"><img src="https://lifepodbrasil.com/wp-content/uploads/2025/05/REFIL-10K-CAPUCCINO.png" alt="Cappuccino"></div><div class="flavor-info"><div class="flavor-name">Cappuccino</div></div></div>
+<div class="flavor-card"><div class="flavor-image"><img src="https://mundovape.net/wp-content/uploads/2024/09/Peach-Orange-10k.webp" alt="Peach Orange"></div><div class="flavor-info"><div class="flavor-name">Peach Orange</div></div></div>
+<div class="flavor-card"><div class="flavor-image"><img src="https://calvapetienda.com/wp-content/uploads/2025/09/LIFE-POD-10.000-WHITE-MOCHA.webp" alt="White Mocca Ice"></div><div class="flavor-info"><div class="flavor-name">White Mocca Ice</div></div></div>
+<div class="flavor-card"><div class="flavor-image"><img src="https://i.postimg.cc/ydkf7mSv/1235.jpg" alt="Dragon Blue Razz"></div><div class="flavor-info"><div class="flavor-name">Dragon Blue Razz</div></div></div>
+<div class="flavor-card"><div class="flavor-image"><img src="https://i.postimg.cc/8z4wWKRK/azuas.jpg" alt="Blue Razz Ice"></div><div class="flavor-info"><div class="flavor-name">Blue Razz Ice</div></div></div>
+<div class="flavor-card"><div class="flavor-image"><img src="https://images.rappi.pe/products/1726547387854_1726547385795_1726547385089.png?d=900x750&e=webp&q=30" alt="Miami Mint"></div><div class="flavor-info"><div class="flavor-name">Miami Mint</div></div></div>
+<div class="flavor-card"><div class="flavor-image"><img src="https://i.postimg.cc/PqLZx22D/dragon123.jpg" alt="Dragon Fruit Ice"></div><div class="flavor-info"><div class="flavor-name">Dragon Fruit Ice</div></div></div>
+<div class="flavor-card"><div class="flavor-image"><img src="https://domun.co/default/image-tool-lambda?new-width=700&new-height=700&new-quality=80&url-image=https%3A%2F%2Fsumerlabs.com%2Fprod%2Fcatalogue%2F5e9288d3d218974f65177a8fc36b5cfba3ef4bca%2Fimage1wmaakrmv33lwqmz1fx.png" alt="Tobacco Virginia"></div><div class="flavor-info"><div class="flavor-name">Tobacco Virginia</div></div></div>
+<div class="flavor-card"><div class="flavor-image"><img src="https://liquidin.pe/cdn/shop/files/LF24.png?v=1738630166&width=990" alt="Green Apple Ice"></div><div class="flavor-info"><div class="flavor-name">Green Apple Ice</div></div></div>
+<div class="flavor-card"><div class="flavor-image"><img src="https://tabernadelvapeador.pe/cdn/shop/files/789300241275_e96c6b24-3b9a-400a-ae28-5ea0ad2b951c.jpg?v=1748043837&width=990" alt="Watermelon Peach"></div><div class="flavor-info"><div class="flavor-name">Watermelon Peach</div></div></div>
+<div class="flavor-card"><div class="flavor-image"><img src="https://buscaparaguai.com.br/thumb/thumb.php?src=%2Foriginal%2Fuploads%2FJPG%2F2024%2F08%2F20%2FSADENE_1724132385.jpg&w=1024&h=768" alt="Candy Ice"></div><div class="flavor-info"><div class="flavor-name">Candy Ice</div></div></div>
+</div>
+</div>
+<!-- STLTH LOOP 9K -->
+<div class="product-category">
+<h3 class="category-title">STLTH LOOP 9K</h3>
+<p class="category-specs">17mL • 20mg/mL o 50mg/mL • ~9,000 Puffs</p>
+<div class="flavors-grid">
+<div class="flavor-card"><div class="flavor-image"><img src="https://i.postimg.cc/N0kWFMHt/dfbn234.jpg" alt="White Grape Ice"></div><div class="flavor-info"><div class="flavor-name">White Grape Ice</div></div></div>
+<div class="flavor-card"><div class="flavor-image"><img src="https://i.postimg.cc/zGnQ2Bps/hg.png" alt="Blue Lemons"></div><div class="flavor-info"><div class="flavor-name">Blue Lemons</div></div></div>
+<div class="flavor-card"><div class="flavor-image"><img src="https://i.postimg.cc/PrdKf4M4/g2134.png" alt="Pineapple Orange"></div><div class="flavor-info"><div class="flavor-name">Pineapple Orange</div></div></div>
+<div class="flavor-card"><div class="flavor-image"><img src="https://i.postimg.cc/d331ngYG/tropical.png" alt="Tropical Storm Ice"></div><div class="flavor-info"><div class="flavor-name">Tropical Storm Ice</div></div></div>
+<div class="flavor-card"><div class="flavor-image"><img src="https://i.postimg.cc/d1vZRW3d/jmnaa.png" alt="Hawaiian Mist Ice"></div><div class="flavor-info"><div class="flavor-name">Hawaiian Mist Ice</div></div></div>
+<div class="flavor-card"><div class="flavor-image"><img src="https://i.postimg.cc/SND0mjc9/443f.png" alt="White Grape"></div><div class="flavor-info"><div class="flavor-name">White Grape</div></div></div>
+<div class="flavor-card"><div class="flavor-image"><img src="https://i.postimg.cc/4xqS3cyn/1.png" alt="Honeydew Mango Ice"></div><div class="flavor-info"><div class="flavor-name">Honeydew Mango Ice</div></div></div>
+</div>
+</div>
+<!-- STLTH LOOP 12K -->
+<div class="product-category">
+<h3 class="category-title">STLTH LOOP 12K</h3>
+<p class="category-specs">17mL • 20mg/mL o 50mg/mL • ~12,000 Puffs</p>
+<div class="flavors-grid">
+<div class="flavor-card"><div class="flavor-image"><img src="https://i.postimg.cc/rpGNLRtN/fsddf.png" alt="Hawaiian Mist Ice"></div><div class="flavor-info"><div class="flavor-name">Hawaiian Mist Ice</div></div></div>
+<div class="flavor-card"><div class="flavor-image"><img src="https://i.postimg.cc/PqmJ3m8Z/GSDG12.png" alt="Strawberry Lime Ice"></div><div class="flavor-info"><div class="flavor-name">Strawberry Lime Ice</div></div></div>
+<div class="flavor-card"><div class="flavor-image"><img src="https://i.postimg.cc/8CBkBNqT/31231.png" alt="Coconut Razz Ice"></div><div class="flavor-info"><div class="flavor-name">Coconut Razz Ice</div></div></div>
+</div>
+</div>
+<!-- STLTH LOOP 15K -->
+<div class="product-category">
+<h3 class="category-title">STLTH LOOP 15K</h3>
+<p class="category-specs">18mL • 20mg/mL o 50mg/mL • ~15,000 Puffs</p>
+<div class="flavors-grid">
+<div class="flavor-card"><div class="flavor-image"><img src="https://i.postimg.cc/P5KTP2Z3/vv123.jpg" alt="Watermelon Lime Ice & Strawberry Lime Ice"></div><div class="flavor-info"><div class="flavor-name">Watermelon Lime Ice & Strawberry Lime Ice</div></div></div>
+<div class="flavor-card"><div class="flavor-image"><img src="https://i.postimg.cc/fbJnkZMD/Captura-de-pantalla-2026-03-02-221840.jpg" alt="Classic Ice & Dry Ice"></div><div class="flavor-info"><div class="flavor-name">Classic Ice & Dry Ice</div></div></div>
+<div class="flavor-card"><div class="flavor-image"><img src="https://i.postimg.cc/9FpvpzM3/v123123.jpg" alt="Strawberry Kiwi Ice & Mango Ice"></div><div class="flavor-info"><div class="flavor-name">Strawberry Kiwi Ice & Mango Ice</div></div></div>
+<div class="flavor-card"><div class="flavor-image"><img src="https://i.postimg.cc/BnbwBgkg/Captura-de-pantalla-2026-03-02-222108.jpg" alt="Peppermint & Spearmint"></div><div class="flavor-info"><div class="flavor-name">Peppermint & Spearmint</div></div></div>
+<div class="flavor-card"><div class="flavor-image"><img src="https://i.postimg.cc/K85vtZXY/b123.jpg" alt="Green Apple Ice & White Grape Ice"></div><div class="flavor-info"><div class="flavor-name">Green Apple Ice & White Grape Ice</div></div></div>
+</div>
+</div>
+<!-- VICE LOOP -->
+<div class="product-category">
+<h3 class="category-title">VICE LOOP</h3>
+<p class="category-specs">10mL • 20mg/mL • ~5,000 Puffs</p>
+<div class="flavors-grid">
+<div class="flavor-card"><div class="flavor-image"><img src="https://i.postimg.cc/V6z3sdc8/Captura-de-pantalla-2026-03-02-145413.jpg" alt="Island Splash Ice"></div><div class="flavor-info"><div class="flavor-name">Island Splash Ice</div></div></div>
+<div class="flavor-card"><div class="flavor-image"><img src="https://i.postimg.cc/6qrRJDSs/prsio.jpg" alt="Prism Ice"></div><div class="flavor-info"><div class="flavor-name">Prism Ice</div></div></div>
+<div class="flavor-card"><div class="flavor-image"><img src="https://i.postimg.cc/qR7jZnTZ/44234.jpg" alt="Nana Berry Ice"></div><div class="flavor-info"><div class="flavor-name">Nana Berry Ice</div></div></div>
+<div class="flavor-card"><div class="flavor-image"><img src="https://i.postimg.cc/xTXB1wBN/as.jpg" alt="Hawaiian Ice"></div><div class="flavor-info"><div class="flavor-name">Hawaiian Ice</div></div></div>
+<div class="flavor-card"><div class="flavor-image"><img src="https://i.postimg.cc/g01md1y3/Captura-de-pantalla-2026-03-02-205347.jpg" alt="Green Burst"></div><div class="flavor-info"><div class="flavor-name">Green Burst</div></div></div>
+<div class="flavor-card"><div class="flavor-image"><img src="https://i.postimg.cc/L526pHx3/123123.jpg" alt="Straw Kiwi Ice"></div><div class="flavor-info"><div class="flavor-name">Straw Kiwi Ice</div></div></div>
+<div class="flavor-card"><div class="flavor-image"><img src="https://i.postimg.cc/rwmk4qQK/1.jpg" alt="Blue Cherry Ice"></div><div class="flavor-info"><div class="flavor-name">Blue Cherry Ice</div></div></div>
+<div class="flavor-card"><div class="flavor-image"><img src="https://i.postimg.cc/Cx300h1q/asd123.jpg" alt="Misty Mango Ice"></div><div class="flavor-info"><div class="flavor-name">Misty Mango Ice</div></div></div>
+<div class="flavor-card"><div class="flavor-image"><img src="https://i.postimg.cc/dV8CvX0z/Captura-de-pantalla-2026-03-02-144342.jpg" alt="White Grape Ice"></div><div class="flavor-info"><div class="flavor-name">White Grape Ice</div></div></div>
+<div class="flavor-card"><div class="flavor-image"><img src="https://i.postimg.cc/bJRCLtw5/Captura-de-pantalla-2026-03-02-205948.jpg" alt="Dragon Berry Mango Ice"></div><div class="flavor-info"><div class="flavor-name">Dragon Berry Mango Ice</div></div></div>
+<div class="flavor-card"><div class="flavor-image"><img src="https://i.postimg.cc/W41G2vfC/Captura-de-pantalla-2026-03-02-144648.jpg" alt="Green Apple Ice"></div><div class="flavor-info"><div class="flavor-name">Green Apple Ice</div></div></div>
+<div class="flavor-card"><div class="flavor-image"><img src="https://i.postimg.cc/JzBpvghD/Captura-de-pantalla-2026-03-02-210110.jpg" alt="Juicy Peach Ice"></div><div class="flavor-info"><div class="flavor-name">Juicy Peach Ice</div></div></div>
+<div class="flavor-card"><div class="flavor-image"><img src="https://i.postimg.cc/g2qMq7k1/asd123123.jpg" alt="Lemon Blue Razz Ice"></div><div class="flavor-info"><div class="flavor-name">Lemon Blue Razz Ice</div></div></div>
+<div class="flavor-card"><div class="flavor-image"><img src="https://i.postimg.cc/SRsrr15s/Captura-de-pantalla-2026-03-02-210209.jpg" alt="Mint Punch Ice"></div><div class="flavor-info"><div class="flavor-name">Mint Punch Ice</div></div></div>
+<div class="flavor-card"><div class="flavor-image"><img src="https://i.postimg.cc/ZnS05P5d/Captura-de-pantalla-2026-03-02-144928.jpg" alt="Apple Kiwi Melon"></div><div class="flavor-info"><div class="flavor-name">Apple Kiwi Melon</div></div></div>
+<div class="flavor-card"><div class="flavor-image"><img src="https://i.postimg.cc/GhbTTgVY/Captura-de-pantalla-2026-03-02-211255.jpg" alt="Strawberry Kiwi Ice"></div><div class="flavor-info"><div class="flavor-name">Strawberry Kiwi Ice</div></div></div>
+<div class="flavor-card"><div class="flavor-image"><img src="https://i.postimg.cc/sDGPgWRF/as123.jpg" alt="Mango Ice"></div><div class="flavor-info"><div class="flavor-name">Mango Ice</div></div></div>
+<div class="flavor-card"><div class="flavor-image"><img src="https://i.postimg.cc/Xv5Yz9tV/pinas1.jpg" alt="Strawberry Banana Pineapple Ice"></div><div class="flavor-info"><div class="flavor-name">Strawberry Banana Pineapple Ice</div></div></div>
+<div class="flavor-card"><div class="flavor-image"><img src="https://i.postimg.cc/g2bPM1yL/123sdfg.jpg" alt="Mint Ice"></div><div class="flavor-info"><div class="flavor-name">Mint Ice</div></div></div>
+</div>
+</div>
+<div class="warning-section">
+<h4>⚠️ ADVERTENCIA</h4>
+<p>La nicotina es altamente adictiva. Producto prohibido para menores de edad. Consulte a su médico antes de usar productos con nicotina.</p>
+</div>
+</section>
+<footer id="contacto">
+<p>&copy; 2024 Vape Elite. Todos los derechos reservados.</p>
+</footer>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+const header = document.getElementById('header');
+window.addEventListener('scroll', () => {
+if (window.scrollY > 50) {
+header.classList.add('scrolled');
+} else {
+header.classList.remove('scrolled');
+}
+});
+const hamburger = document.getElementById('hamburger');
+const navOverlay = document.getElementById('navOverlay');
+const mobileLinks = document.querySelectorAll('.nav-link-mobile');
+hamburger.addEventListener('click', () => {
+hamburger.classList.toggle('active');
+navOverlay.classList.toggle('active');
+document.body.style.overflow = navOverlay.classList.contains('active') ? 'hidden' : '';
+});
+mobileLinks.forEach(link => {
+link.addEventListener('click', () => {
+hamburger.classList.remove('active');
+navOverlay.classList.remove('active');
+document.body.style.overflow = '';
+});
+});
+navOverlay.addEventListener('click', (e) => {
+if (e.target === navOverlay) {
+hamburger.classList.remove('active');
+navOverlay.classList.remove('active');
+document.body.style.overflow = '';
+}
+});
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+anchor.addEventListener('click', function(e) {
+e.preventDefault();
+const target = document.querySelector(this.getAttribute('href'));
+if (target) {
+target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+});
+});
+const observer = new IntersectionObserver((entries) => {
+entries.forEach(entry => {
+if (entry.isIntersecting) {
+entry.target.style.opacity = '1';
+entry.target.style.transform = 'translateY(0)';
+}
+});
+}, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+document.querySelectorAll('.product-category').forEach(category => {
+category.style.opacity = '0';
+category.style.transform = 'translateY(30px)';
+category.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+observer.observe(category);
+});
+const vimeoContainer = document.getElementById('vimeoBg');
+if (vimeoContainer) {
+const observerVideo = new IntersectionObserver((entries) => {
+entries.forEach(entry => {
+const iframe = vimeoContainer.querySelector('iframe');
+if (iframe) {
+if (!entry.isIntersecting) {
+const src = iframe.src;
+iframe.src = src.replace('autoplay=1', 'autoplay=0');
+} else {
+const src = iframe.src;
+iframe.src = src.replace('autoplay=0', 'autoplay=1');
+}
+}
+});
+}, { threshold: 0.1 });
+observerVideo.observe(vimeoContainer);
+}
+});
+</script>
 </body>
 </html>
