@@ -14,7 +14,6 @@ color: #ffffff;
 overflow-x: hidden;
 position: relative;
 }
-/* 🎬 VIMEO BACKGROUND */
 .vimeo-background {
 position: fixed;
 top: 0;
@@ -36,23 +35,16 @@ transform: translate(-50%, -50%);
 pointer-events: none;
 border: none;
 }
-/* Overlay para legibilidad - MÁS OSCURO EN MÓVILES */
 .video-overlay {
 position: fixed;
 top: 0;
 left: 0;
 width: 100%;
 height: 100%;
-background: linear-gradient(
-180deg,
-rgba(0,0,0,0.10) 0%,
-rgba(5,5,12,0.15) 40%,
-rgba(0,0,0,0.25) 100%
-);
+background: linear-gradient(180deg, rgba(0,0,0,0.10) 0%, rgba(5,5,12,0.15) 40%, rgba(0,0,0,0.25) 100%);
 z-index: -1;
 pointer-events: none;
 }
-/* Header */
 header {
 position: fixed;
 top: 0;
@@ -169,7 +161,6 @@ text-transform: uppercase;
 transition: all 0.3s;
 }
 .nav-overlay a:hover { color: #ffffff; transform: scale(1.05); }
-/* Hero Section */
 .hero {
 margin-top: 80px;
 padding: 120px 60px 80px;
@@ -229,7 +220,6 @@ transition: transform 0.5s ease;
 from { opacity: 0; transform: translateY(30px); }
 to { opacity: 1; transform: translateY(0); }
 }
-/* Products */
 .products {
 padding: 120px 60px;
 max-width: 1600px;
@@ -260,7 +250,48 @@ letter-spacing: 6px;
 font-weight: 400;
 }
 
-/* 🔍 SEARCH BAR */
+/* 🔘 CATEGORY BUTTONS - OPCIÓN 3: GRIS PERLA */
+.category-filters {
+display: flex;
+gap: 15px;
+justify-content: center;
+flex-wrap: wrap;
+margin-bottom: 50px;
+padding: 0 20px;
+}
+.category-btn {
+background: linear-gradient(135deg, #E8E8E8 0%, #D0D0D0 100%);
+border: 2px solid rgba(232, 232, 232, 0.3);
+color: #1A1A1A;
+padding: 15px 30px;
+border-radius: 8px;
+cursor: pointer;
+font-family: 'Inter', sans-serif;
+font-size: 12px;
+font-weight: 600;
+letter-spacing: 1.5px;
+text-transform: uppercase;
+transition: all 0.3s ease;
+min-width: 180px;
+box-shadow: 0 4px 20px rgba(232, 232, 232, 0.15);
+}
+.category-btn:hover {
+background: linear-gradient(135deg, #F0F0F0 0%, #E8E8E8 100%);
+border-color: rgba(232, 232, 232, 0.5);
+box-shadow: 0 6px 30px rgba(232, 232, 232, 0.25);
+transform: translateY(-2px);
+}
+.category-btn.active {
+background: linear-gradient(135deg, #F0F0F0 0%, #E8E8E8 100%);
+border-color: rgba(232, 232, 232, 0.7);
+box-shadow: 0 8px 35px rgba(232, 232, 232, 0.4);
+transform: translateY(-3px);
+}
+.category-btn .icon {
+margin-right: 8px;
+font-size: 14px;
+}
+
 .search-container {
 max-width: 600px;
 margin: 0 auto 60px;
@@ -318,7 +349,6 @@ font-size: 48px;
 margin-bottom: 15px;
 opacity: 0.5;
 }
-
 .product-category {
 margin-bottom: 120px;
 padding: 40px;
@@ -499,8 +529,8 @@ margin-top: 70px;
 padding: 100px 25px 60px;
 min-height: auto;
 }
-.hero h1 { 
-font-size: 48px; 
+.hero h1 {
+font-size: 48px;
 letter-spacing: 4px;
 padding: 20px 30px;
 }
@@ -533,50 +563,35 @@ font-size: 14px;
 right: 20px;
 font-size: 18px;
 }
-
-/* Overlay MÁS OSCURO en móviles para mejor legibilidad */
 .video-overlay {
-background: linear-gradient(
-180deg,
-rgba(0,0,0,0.30) 0%,
-rgba(5,5,12,0.40) 40%,
-rgba(0,0,0,0.50) 100%
-);
+background: linear-gradient(180deg, rgba(0,0,0,0.30) 0%, rgba(5,5,12,0.40) 40%, rgba(0,0,0,0.50) 100%);
+}
+.category-filters {
+flex-direction: column;
+align-items: stretch;
+}
+.category-btn {
+min-width: 100%;
+padding: 12px 20px;
+font-size: 11px;
 }
 }
-
 @media (max-width: 480px) {
 .hero h1 { font-size: 36px; padding: 15px 20px; }
 .vape-hero { width: 160px; }
 .flavors-grid { grid-template-columns: repeat(auto-fill, minmax(85px, 1fr)); }
 .flavor-image { height: 100px; }
 .product-category { padding: 25px 15px; }
-
-/* Overlay aún más oscuro en pantallas muy pequeñas */
 .video-overlay {
-background: linear-gradient(
-180deg,
-rgba(0,0,0,0.35) 0%,
-rgba(5,5,12,0.45) 40%,
-rgba(0,0,0,0.55) 100%
-);
+background: linear-gradient(180deg, rgba(0,0,0,0.35) 0%, rgba(5,5,12,0.45) 40%, rgba(0,0,0,0.55) 100%);
 }
 }
 </style>
 </head>
 <body>
-<!-- 🎬 VIMEO BACKGROUND VIDEO - SE REPRODUCE EN TODOS LOS DISPOSITIVOS -->
 <div class="vimeo-background" id="vimeoBg">
-<iframe 
-src="https://player.vimeo.com/video/1169818034?background=1&autoplay=1&loop=1&muted=1&title=0&byline=0&portrait=0&controls=0&transparent=0"
-frameborder="0"
-allow="autoplay; fullscreen; picture-in-picture"
-allowfullscreen
-loading="lazy"
-title="Vape Elite Background">
-</iframe>
+<iframe src="https://player.vimeo.com/video/1169818034?background=1&autoplay=1&loop=1&muted=1&title=0&byline=0&portrait=0&controls=0&transparent=0" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen loading="lazy" title="Vape Elite Background"></iframe>
 </div>
-<!-- Overlay adaptable - más oscuro en móviles -->
 <div class="video-overlay"></div>
 <header id="header">
 <nav>
@@ -600,8 +615,7 @@ title="Vape Elite Background">
 <h1>EXCELENCIA</h1>
 <p>Colección Exclusiva de Productos Premium</p>
 <div class="vape-hero">
-<img src="" alt="Vape Premium"
-onerror="this.src='https://via.placeholder.com/320x400/1a1a2e/ffffff?text=VAPE+ELITE'">
+<img src="" alt="Vape Premium" onerror="this.src='https://via.placeholder.com/320x400/1a1a2e/ffffff?text=VAPE+ELITE'">
 </div>
 <div class="scroll-indicator">
 <span>Explorar</span>
@@ -613,15 +627,30 @@ onerror="this.src='https://via.placeholder.com/320x400/1a1a2e/ffffff?text=VAPE+E
 <h2>COLECCIÓN</h2>
 </div>
 
-<!-- 🔍 BARRA DE BÚSQUEDA -->
+<!-- 🔘 BOTONES DE CATEGORÍAS - OPCIÓN 3: GRIS PERLA -->
+<div class="category-filters">
+<button class="category-btn active" data-category="all">
+<span class="icon">🔥</span> Todos
+</button>
+<button class="category-btn" data-category="life-pod">
+<span class="icon">💨</span> Life Pod Eco II
+</button>
+<button class="category-btn" data-category="stlth-9k">
+<span class="icon">⚡</span> STLTH 9K
+</button>
+<button class="category-btn" data-category="stlth-12k">
+<span class="icon">🎯</span> STLTH 12K
+</button>
+<button class="category-btn" data-category="stlth-15k">
+<span class="icon">👑</span> STLTH 15K
+</button>
+<button class="category-btn" data-category="vice-loop">
+<span class="icon">🌟</span> Vice Loop
+</button>
+</div>
+
 <div class="search-container">
-<input 
-type="text" 
-class="search-box" 
-id="searchBox" 
-placeholder="Buscar sabores (ej: mango, blueberry, ice...)"
-autocomplete="off"
->
+<input type="text" class="search-box" id="searchBox" placeholder="Buscar sabores (ej: mango, blueberry, ice...)" autocomplete="off">
 <span class="search-icon">🔍</span>
 </div>
 <div class="search-results-count" id="searchResults"></div>
@@ -630,7 +659,6 @@ autocomplete="off"
 <p>No encontramos productos que coincidan con tu búsqueda</p>
 <p style="font-size: 12px; margin-top: 10px; opacity: 0.7;">Intenta con otros términos</p>
 </div>
-
 <!-- LIFE POD ECO II -->
 <div class="product-category" data-category="life-pod">
 <h3 class="category-title">LIFE POD ECO II</h3>
@@ -822,48 +850,45 @@ iframe.src = src.replace('autoplay=0', 'autoplay=1');
 }, { threshold: 0.1 });
 observerVideo.observe(vimeoContainer);
 }
-
-// 🔍 FUNCIONALIDAD DE BÚSQUEDA
-const searchBox = document.getElementById('searchBox');
-const searchResults = document.getElementById('searchResults');
-const noResults = document.getElementById('noResults');
+const categoryBtns = document.querySelectorAll('.category-btn');
 const allCategories = document.querySelectorAll('.product-category');
 const allFlavorCards = document.querySelectorAll('.flavor-card');
 const totalProducts = allFlavorCards.length;
-
-// Actualizar contador inicial
-updateResultsCount(totalProducts, totalProducts);
-
-searchBox.addEventListener('input', (e) => {
-const searchTerm = e.target.value.toLowerCase().trim();
-let visibleProducts = 0;
-const visibleCategories = new Set();
-
-// Filtrar cards de productos
-allFlavorCards.forEach(card => {
-const productName = card.getAttribute('data-name');
-const category = card.closest('.product-category');
-
-if (searchTerm === '' || productName.includes(searchTerm)) {
-card.classList.remove('hidden');
-visibleProducts++;
-visibleCategories.add(category);
-} else {
-card.classList.add('hidden');
-}
-});
-
-// Mostrar/ocultar categorías según resultados
+categoryBtns.forEach(btn => {
+btn.addEventListener('click', () => {
+categoryBtns.forEach(b => b.classList.remove('active'));
+btn.classList.add('active');
+const selectedCategory = btn.getAttribute('data-category');
 allCategories.forEach(category => {
-const visibleCardsInCategory = category.querySelectorAll('.flavor-card:not(.hidden)').length;
-if (visibleCardsInCategory > 0) {
+if (selectedCategory === 'all' || category.getAttribute('data-category') === selectedCategory) {
 category.classList.remove('hidden');
 } else {
 category.classList.add('hidden');
 }
 });
-
-// Mostrar mensaje si no hay resultados
+updateResultsCount();
+});
+});
+const searchBox = document.getElementById('searchBox');
+const searchResults = document.getElementById('searchResults');
+const noResults = document.getElementById('noResults');
+updateResultsCount();
+searchBox.addEventListener('input', (e) => {
+const searchTerm = e.target.value.toLowerCase().trim();
+let visibleProducts = 0;
+allFlavorCards.forEach(card => {
+const productName = card.getAttribute('data-name');
+const category = card.closest('.product-category');
+const isCategoryVisible = !category.classList.contains('hidden');
+if (searchTerm === '' || productName.includes(searchTerm)) {
+if (isCategoryVisible) {
+card.classList.remove('hidden');
+visibleProducts++;
+}
+} else {
+card.classList.add('hidden');
+}
+});
 if (visibleProducts === 0) {
 noResults.classList.add('show');
 searchResults.style.display = 'none';
@@ -871,16 +896,25 @@ searchResults.style.display = 'none';
 noResults.classList.remove('show');
 searchResults.style.display = 'block';
 }
-
-// Actualizar contador
-updateResultsCount(visibleProducts, totalProducts);
+updateResultsCount();
 });
-
-function updateResultsCount(visible, total) {
+function updateResultsCount() {
+const activeCategory = document.querySelector('.category-btn.active');
+const categoryName = activeCategory ? activeCategory.textContent.trim() : 'Todos';
+let visibleProducts = 0;
+allCategories.forEach(category => {
+if (!category.classList.contains('hidden')) {
+visibleProducts += category.querySelectorAll('.flavor-card:not(.hidden)').length;
+}
+});
 if (searchBox.value.trim() === '') {
-searchResults.textContent = `${total} productos disponibles`;
+if (activeCategory && activeCategory.getAttribute('data-category') !== 'all') {
+searchResults.textContent = `${visibleProducts} productos en ${categoryName}`;
 } else {
-searchResults.textContent = `${visible} resultado${visible !== 1 ? 's' : ''} encontrado${visible !== 1 ? 's' : ''}`;
+searchResults.textContent = `${totalProducts} productos disponibles`;
+}
+} else {
+searchResults.textContent = `${visibleProducts} resultado${visibleProducts !== 1 ? 's' : ''} encontrado${visibleProducts !== 1 ? 's' : ''}`;
 }
 }
 });
