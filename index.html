@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>VAPE LUXURY | Colección Premium</title>
+<title>VAPE ELITE | Colección Premium</title>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;600&display=swap');
 * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -36,7 +36,7 @@ transform: translate(-50%, -50%);
 pointer-events: none;
 border: none;
 }
-/* Overlay para legibilidad - MÁS OSCURO EN MÓVILES */
+/* Overlay */
 .video-overlay {
 position: fixed;
 top: 0;
@@ -259,45 +259,48 @@ font-size: 48px;
 letter-spacing: 6px;
 font-weight: 400;
 }
-/* 🔘 CATEGORY BUTTONS - ESTILO COMO LA IMAGEN */
+/* 🔘 CATEGORY BUTTONS - GRID 2 COLUMNAS */
 .category-filters {
-display: flex;
-gap: 15px;
+display: grid;
+grid-template-columns: repeat(2, 1fr);
+gap: 12px;
 justify-content: center;
-flex-wrap: wrap;
 margin-bottom: 50px;
 padding: 0 20px;
 }
 .category-btn {
-background: rgba(255, 255, 255, 0.05);
-border: 1px solid rgba(255, 255, 255, 0.15);
-color: rgba(255, 255, 255, 0.7);
-padding: 15px 30px;
-border-radius: 8px;
+background: rgba(30, 30, 30, 0.95);
+border: 1px solid rgba(255, 255, 255, 0.1);
+color: rgba(255, 255, 255, 0.8);
+padding: 14px 20px;
+border-radius: 12px;
 cursor: pointer;
 font-family: 'Inter', sans-serif;
-font-size: 12px;
+font-size: 11px;
 font-weight: 600;
-letter-spacing: 1.5px;
+letter-spacing: 1px;
 text-transform: uppercase;
 transition: all 0.3s ease;
 backdrop-filter: blur(10px);
-min-width: 180px;
+white-space: nowrap;
+display: flex;
+align-items: center;
+justify-content: center;
+gap: 8px;
+box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
 }
 .category-btn:hover {
-background: rgba(255, 255, 255, 0.1);
-border-color: rgba(255, 255, 255, 0.3);
-color: #ffffff;
+background: rgba(40, 40, 40, 0.95);
+border-color: rgba(255, 255, 255, 0.2);
 transform: translateY(-2px);
 }
 .category-btn.active {
 background: linear-gradient(135deg, #ffd700 0%, #ffb700 100%);
 border-color: #ffd700;
 color: #000000;
-box-shadow: 0 8px 25px rgba(255, 215, 0, 0.3);
+box-shadow: 0 4px 20px rgba(255, 215, 0, 0.4);
 }
 .category-btn .icon {
-margin-right: 8px;
 font-size: 14px;
 }
 /* 🔍 SEARCH BAR */
@@ -572,7 +575,7 @@ font-size: 14px;
 right: 20px;
 font-size: 18px;
 }
-/* Overlay MÁS OSCURO en móviles para mejor legibilidad */
+/* Overlay MÁS OSCURO en móviles */
 .video-overlay {
 background: linear-gradient(
 180deg,
@@ -581,15 +584,15 @@ rgba(5,5,12,0.40) 40%,
 rgba(0,0,0,0.50) 100%
 );
 }
-/* Category buttons responsive */
+/* Category buttons - Grid 2 columnas en móvil */
 .category-filters {
-flex-direction: column;
-align-items: stretch;
+grid-template-columns: repeat(2, 1fr);
+gap: 10px;
+padding: 0 15px;
 }
 .category-btn {
-min-width: 100%;
-padding: 12px 20px;
-font-size: 11px;
+padding: 12px 15px;
+font-size: 10px;
 }
 }
 @media (max-width: 480px) {
@@ -598,7 +601,7 @@ font-size: 11px;
 .flavors-grid { grid-template-columns: repeat(auto-fill, minmax(85px, 1fr)); }
 .flavor-image { height: 100px; }
 .product-category { padding: 25px 15px; }
-/* Overlay aún más oscuro en pantallas muy pequeñas */
+/* Overlay aún más oscuro */
 .video-overlay {
 background: linear-gradient(
 180deg,
@@ -607,11 +610,15 @@ rgba(5,5,12,0.45) 40%,
 rgba(0,0,0,0.55) 100%
 );
 }
+.category-btn {
+padding: 10px 12px;
+font-size: 9px;
+}
 }
 </style>
 </head>
 <body>
-<!-- 🎬 VIMEO BACKGROUND VIDEO - SE REPRODUCE EN TODOS LOS DISPOSITIVOS -->
+<!-- 🎬 VIMEO BACKGROUND -->
 <div class="vimeo-background" id="vimeoBg">
 <iframe
 src="https://player.vimeo.com/video/1169818034?background=1&autoplay=1&loop=1&muted=1&title=0&byline=0&portrait=0&controls=0&transparent=0"
@@ -622,11 +629,11 @@ loading="lazy"
 title="Vape Elite Background">
 </iframe>
 </div>
-<!-- Overlay adaptable - más oscuro en móviles -->
 <div class="video-overlay"></div>
+
 <header id="header">
 <nav>
-<a href="#inicio" class="logo">VAPE LUXURY</a>
+<a href="#inicio" class="logo">VAPE ELITE</a>
 <ul class="nav-links">
 <li><a href="#inicio">Inicio</a></li>
 <li><a href="#productos">Productos</a></li>
@@ -637,11 +644,13 @@ title="Vape Elite Background">
 </button>
 </nav>
 </header>
+
 <div class="nav-overlay" id="navOverlay">
 <a href="#inicio" class="nav-link-mobile">Inicio</a>
 <a href="#productos" class="nav-link-mobile">Productos</a>
 <a href="#contacto" class="nav-link-mobile">Contacto</a>
 </div>
+
 <section class="hero" id="inicio">
 <h1>EXCELENCIA</h1>
 <p>Colección Exclusiva de Productos Premium</p>
@@ -654,11 +663,13 @@ onerror="this.src='https://via.placeholder.com/320x400/1a1a2e/ffffff?text=VAPE+E
 <div class="line"></div>
 </div>
 </section>
+
 <section class="products" id="productos">
 <div class="section-header">
 <h2>COLECCIÓN</h2>
 </div>
-<!-- 🔘 BOTONES DE CATEGORÍAS - ESTILO COMO LA IMAGEN -->
+
+<!-- 🔘 BOTONES DE CATEGORÍAS - GRID 2 COLUMNAS -->
 <div class="category-filters">
 <button class="category-btn active" data-category="all">
 <span class="icon">🔥</span> Todos
@@ -678,7 +689,6 @@ onerror="this.src='https://via.placeholder.com/320x400/1a1a2e/ffffff?text=VAPE+E
 <button class="category-btn" data-category="vice-loop">
 <span class="icon">🌟</span> Vice Loop
 </button>
-<!-- NUEVOS BOTONES OXBAR -->
 <button class="category-btn" data-category="oxbar-25k">
 <span class="icon">🚀</span> Oxbar 25K
 </button>
@@ -686,6 +696,7 @@ onerror="this.src='https://via.placeholder.com/320x400/1a1a2e/ffffff?text=VAPE+E
 <span class="icon">🛸</span> Oxbar 35K
 </button>
 </div>
+
 <!-- 🔍 BARRA DE BÚSQUEDA -->
 <div class="search-container">
 <input
@@ -703,6 +714,7 @@ autocomplete="off"
 <p>No encontramos productos que coincidan con tu búsqueda</p>
 <p style="font-size: 12px; margin-top: 10px; opacity: 0.7;">Intenta con otros términos</p>
 </div>
+
 <!-- LIFE POD ECO II -->
 <div class="product-category" data-category="life-pod">
 <h3 class="category-title">LIFE POD ECO II</h3>
@@ -751,6 +763,7 @@ autocomplete="off"
 <div class="flavor-card" data-name="candy ice"><div class="flavor-image"><img src="https://buscaparaguai.com.br/thumb/thumb.php?src=%2Foriginal%2Fuploads%2FJPG%2F2024%2F08%2F20%2FSADENE_1724132385.jpg&w=1024&h=768" alt="Candy Ice"></div><div class="flavor-info"><div class="flavor-name">Candy Ice</div></div></div>
 </div>
 </div>
+
 <!-- STLTH LOOP 9K -->
 <div class="product-category" data-category="stlth-9k">
 <h3 class="category-title">STLTH LOOP 9K</h3>
@@ -765,6 +778,7 @@ autocomplete="off"
 <div class="flavor-card" data-name="honeydew mango ice"><div class="flavor-image"><img src="https://i.postimg.cc/4xqS3cyn/1.png" alt="Honeydew Mango Ice"></div><div class="flavor-info"><div class="flavor-name">Honeydew Mango Ice</div></div></div>
 </div>
 </div>
+
 <!-- STLTH LOOP 12K -->
 <div class="product-category" data-category="stlth-12k">
 <h3 class="category-title">STLTH LOOP 12K</h3>
@@ -775,6 +789,7 @@ autocomplete="off"
 <div class="flavor-card" data-name="coconut razz ice"><div class="flavor-image"><img src="https://i.postimg.cc/8CBkBNqT/31231.png" alt="Coconut Razz Ice"></div><div class="flavor-info"><div class="flavor-name">Coconut Razz Ice</div></div></div>
 </div>
 </div>
+
 <!-- STLTH LOOP 15K -->
 <div class="product-category" data-category="stlth-15k">
 <h3 class="category-title">STLTH LOOP 15K</h3>
@@ -787,6 +802,7 @@ autocomplete="off"
 <div class="flavor-card" data-name="green apple ice white grape ice"><div class="flavor-image"><img src="https://i.postimg.cc/K85vtZXY/b123.jpg" alt="Green Apple Ice & White Grape Ice"></div><div class="flavor-info"><div class="flavor-name">Green Apple Ice & White Grape Ice</div></div></div>
 </div>
 </div>
+
 <!-- VICE LOOP -->
 <div class="product-category" data-category="vice-loop">
 <h3 class="category-title">VICE LOOP</h3>
@@ -819,14 +835,14 @@ autocomplete="off"
 <h3 class="category-title">OXBAR 25K</h3>
 <p class="category-specs">Dual Mesh • Ajuste de Aire • ~25,000 Puffs</p>
 <div class="flavors-grid">
-<div class="flavor-card" data-name="blue razz ice"><div class="flavor-image"><img src="https://images.rappi.pe/products/1726022406996_1726022385902_1726022382827.png?d=900x750&e=webp&q=30" alt="Blue Razz Ice"></div><div class="flavor-info"><div class="flavor-name">Green Apple Ice🍏</div></div></div>
-<div class="flavor-card" data-name="watermelon ice"><div class="flavor-image"><img src="https://cdn.shopify.com/s/files/1/0584/6709/0582/files/PeachIce_2c072af0-6a81-4a8b-93ac-87051863ace6.png?v=1720604650" alt="Watermelon Ice"></div><div class="flavor-info"><div class="flavor-name">Peach Ice</div></div></div>
-<div class="flavor-card" data-name="grape ice"><div class="flavor-image"><img src="https://images.rappi.pe/products/1726021857332_1726021839913_1726021836586.png?d=900x750&e=webp&q=30" alt="Grape Ice"></div><div class="flavor-info"><div class="flavor-name">Mango Peach Ice🥭</div></div></div>
-<div class="flavor-card" data-name="Mango Peach Ice"><div class="flavor-image"><img src="https://divapers.pe/cdn/shop/files/Extreme_Mint_1.png?v=1750779174&width=1946" alt="Strawberry Kiwi"></div><div class="flavor-info"><div class="flavor-name">EXTREME MINT </div></div></div>
-<div class="flavor-card" data-name="Grape Ice"><div class="flavor-image"><img src="https://cdn.shopify.com/s/files/1/0584/6709/0582/files/GrapeIce_2ff736e0-fc57-4482-adf7-dcf9525962ff.png?v=1720604650" alt="Strawberry Kiwi"></div><div class="flavor-info"><div class="flavor-name">Grape Ice </div></div></div>
-<div class="flavor-card" data-name="strawberry lemon"><div class="flavor-image"><img src="https://cdn.shopify.com/s/files/1/0584/6709/0582/files/StrawberryLemon.png?v=1720604650" alt="Strawberry Kiwi"></div><div class="flavor-info"><div class="flavor-name">strawberry lemon </div></div></div>
-<div class="flavor-card" data-name="strawberry kiwi"><div class="flavor-image"><img src="https://cdn.shopify.com/s/files/1/0584/6709/0582/files/GrapefruitPassionFruit.png?v=1720604650" alt="GrapefruitPassion Fruit Ice"></div><div class="flavor-info"><div class="flavor-name">GrapefruitPassion Fruit Ice</div></div></div>
-<div class="flavor-card" data-name="strawberry kiwi"><div class="flavor-image"><img src="https://cdn.shopify.com/s/files/1/0584/6709/0582/files/OrangeFanta.png?v=1720604650" alt="Orange Fanta"></div><div class="flavor-info"><div class="flavor-name">Orange Fanta</div></div></div>
+<div class="flavor-card" data-name="green apple ice"><div class="flavor-image"><img src="https://images.rappi.pe/products/1726022406996_1726022385902_1726022382827.png?d=900x750&e=webp&q=30" alt="Green Apple Ice"></div><div class="flavor-info"><div class="flavor-name">Green Apple Ice🍏</div></div></div>
+<div class="flavor-card" data-name="peach ice"><div class="flavor-image"><img src="https://cdn.shopify.com/s/files/1/0584/6709/0582/files/PeachIce_2c072af0-6a81-4a8b-93ac-87051863ace6.png?v=1720604650" alt="Peach Ice"></div><div class="flavor-info"><div class="flavor-name">Peach Ice</div></div></div>
+<div class="flavor-card" data-name="mango peach ice"><div class="flavor-image"><img src="https://images.rappi.pe/products/1726021857332_1726021839913_1726021836586.png?d=900x750&e=webp&q=30" alt="Mango Peach Ice"></div><div class="flavor-info"><div class="flavor-name">Mango Peach Ice🥭</div></div></div>
+<div class="flavor-card" data-name="extreme mint"><div class="flavor-image"><img src="https://divapers.pe/cdn/shop/files/Extreme_Mint_1.png?v=1750779174&width=1946" alt="Extreme Mint"></div><div class="flavor-info"><div class="flavor-name">EXTREME MINT</div></div></div>
+<div class="flavor-card" data-name="grape ice"><div class="flavor-image"><img src="https://cdn.shopify.com/s/files/1/0584/6709/0582/files/GrapeIce_2ff736e0-fc57-4482-adf7-dcf9525962ff.png?v=1720604650" alt="Grape Ice"></div><div class="flavor-info"><div class="flavor-name">Grape Ice</div></div></div>
+<div class="flavor-card" data-name="strawberry lemon"><div class="flavor-image"><img src="https://cdn.shopify.com/s/files/1/0584/6709/0582/files/StrawberryLemon.png?v=1720604650" alt="Strawberry Lemon"></div><div class="flavor-info"><div class="flavor-name">Strawberry Lemon</div></div></div>
+<div class="flavor-card" data-name="grapefruit passion fruit ice"><div class="flavor-image"><img src="https://cdn.shopify.com/s/files/1/0584/6709/0582/files/GrapefruitPassionFruit.png?v=1720604650" alt="Grapefruit Passion Fruit Ice"></div><div class="flavor-info"><div class="flavor-name">Grapefruit Passion Fruit Ice</div></div></div>
+<div class="flavor-card" data-name="orange fanta"><div class="flavor-image"><img src="https://cdn.shopify.com/s/files/1/0584/6709/0582/files/OrangeFanta.png?v=1720604650" alt="Orange Fanta"></div><div class="flavor-info"><div class="flavor-name">Orange Fanta</div></div></div>
 </div>
 </div>
 
@@ -835,10 +851,10 @@ autocomplete="off"
 <h3 class="category-title">OXBAR 35K</h3>
 <p class="category-specs">Pantalla Digital • 18mL • ~35,000 Puffs</p>
 <div class="flavors-grid">
-<div class="flavor-card" data-name="mango peach"><div class="flavor-image"><img src="https://www.vaporclub.pe/cdn/shop/files/08.png?v=1763140683&width=1200" alt="Peach Blue Razz"></div><div class="flavor-info"><div class="flavor-name">Peach Blue Razz</div></div></div>
-<div class="flavor-card" data-name="Mixed Berries"><div class="flavor-image"><img src="https://www.vaporclub.pe/cdn/shop/files/06_e57e2caa-438b-42ab-b4d7-9a3ee285e2f9.png?v=1763140078&width=1200" alt="Cool Mint"></div><div class="flavor-info"><div class="flavor-name">Mixed Berries</div></div></div>
-<div class="flavor-card" data-name="Grape Ice"><div class="flavor-image"><img src="https://www.vaporclub.pe/cdn/shop/files/04.png?v=1762899576&width=1200" alt="Grape Ice"></div><div class="flavor-info"><div class="flavor-name"> Grape Ice </div></div></div>
-<div class="flavor-card" data-name="Grape Bull"><div class="flavor-image"><img src="https://www.vaporclub.pe/cdn/shop/files/03.png?v=1762899382&width=1200" alt="Grape Bull"></div><div class="flavor-info"><div class="flavor-name">Grape BulL</div></div></div>
+<div class="flavor-card" data-name="peach blue razz"><div class="flavor-image"><img src="https://www.vaporclub.pe/cdn/shop/files/08.png?v=1763140683&width=1200" alt="Peach Blue Razz"></div><div class="flavor-info"><div class="flavor-name">Peach Blue Razz</div></div></div>
+<div class="flavor-card" data-name="mixed berries"><div class="flavor-image"><img src="https://www.vaporclub.pe/cdn/shop/files/06_e57e2caa-438b-42ab-b4d7-9a3ee285e2f9.png?v=1763140078&width=1200" alt="Mixed Berries"></div><div class="flavor-info"><div class="flavor-name">Mixed Berries</div></div></div>
+<div class="flavor-card" data-name="grape ice"><div class="flavor-image"><img src="https://www.vaporclub.pe/cdn/shop/files/04.png?v=1762899576&width=1200" alt="Grape Ice"></div><div class="flavor-info"><div class="flavor-name">Grape Ice</div></div></div>
+<div class="flavor-card" data-name="grape bull"><div class="flavor-image"><img src="https://www.vaporclub.pe/cdn/shop/files/03.png?v=1762899382&width=1200" alt="Grape Bull"></div><div class="flavor-info"><div class="flavor-name">Grape Bull</div></div></div>
 </div>
 </div>
 
@@ -847,9 +863,11 @@ autocomplete="off"
 <p>La nicotina es altamente adictiva. Producto prohibido para menores de edad. Consulte a su médico antes de usar productos con nicotina.</p>
 </div>
 </section>
+
 <footer id="contacto">
 <p>&copy; 2024 Vape Elite. Todos los derechos reservados.</p>
 </footer>
+
 <script>
 document.addEventListener('DOMContentLoaded', () => {
 const header = document.getElementById('header');
@@ -860,14 +878,17 @@ header.classList.add('scrolled');
 header.classList.remove('scrolled');
 }
 });
+
 const hamburger = document.getElementById('hamburger');
 const navOverlay = document.getElementById('navOverlay');
 const mobileLinks = document.querySelectorAll('.nav-link-mobile');
+
 hamburger.addEventListener('click', () => {
 hamburger.classList.toggle('active');
 navOverlay.classList.toggle('active');
 document.body.style.overflow = navOverlay.classList.contains('active') ? 'hidden' : '';
 });
+
 mobileLinks.forEach(link => {
 link.addEventListener('click', () => {
 hamburger.classList.remove('active');
@@ -875,6 +896,7 @@ navOverlay.classList.remove('active');
 document.body.style.overflow = '';
 });
 });
+
 navOverlay.addEventListener('click', (e) => {
 if (e.target === navOverlay) {
 hamburger.classList.remove('active');
@@ -882,6 +904,7 @@ navOverlay.classList.remove('active');
 document.body.style.overflow = '';
 }
 });
+
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 anchor.addEventListener('click', function(e) {
 e.preventDefault();
@@ -891,6 +914,7 @@ target.scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
 });
 });
+
 const observer = new IntersectionObserver((entries) => {
 entries.forEach(entry => {
 if (entry.isIntersecting) {
@@ -899,12 +923,14 @@ entry.target.style.transform = 'translateY(0)';
 }
 });
 }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
 document.querySelectorAll('.product-category').forEach(category => {
 category.style.opacity = '0';
 category.style.transform = 'translateY(30px)';
 category.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
 observer.observe(category);
 });
+
 const vimeoContainer = document.getElementById('vimeoBg');
 if (vimeoContainer) {
 const observerVideo = new IntersectionObserver((entries) => {
@@ -923,19 +949,19 @@ iframe.src = src.replace('autoplay=0', 'autoplay=1');
 }, { threshold: 0.1 });
 observerVideo.observe(vimeoContainer);
 }
-// 🔘 FILTRO DE CATEGORÍAS POR BOTONES
+
+// 🔘 FILTRO DE CATEGORÍAS
 const categoryBtns = document.querySelectorAll('.category-btn');
 const allCategories = document.querySelectorAll('.product-category');
 const allFlavorCards = document.querySelectorAll('.flavor-card');
 const totalProducts = allFlavorCards.length;
+
 categoryBtns.forEach(btn => {
 btn.addEventListener('click', () => {
-// Remover clase active de todos los botones
 categoryBtns.forEach(b => b.classList.remove('active'));
-// Agregar clase active al botón clickeado
 btn.classList.add('active');
 const selectedCategory = btn.getAttribute('data-category');
-// Filtrar categorías
+
 allCategories.forEach(category => {
 if (selectedCategory === 'all' || category.getAttribute('data-category') === selectedCategory) {
 category.classList.remove('hidden');
@@ -943,24 +969,27 @@ category.classList.remove('hidden');
 category.classList.add('hidden');
 }
 });
-// Actualizar contador
+
 updateResultsCount();
 });
 });
+
 // 🔍 FUNCIONALIDAD DE BÚSQUEDA
 const searchBox = document.getElementById('searchBox');
 const searchResults = document.getElementById('searchResults');
 const noResults = document.getElementById('noResults');
-// Actualizar contador inicial
+
 updateResultsCount();
+
 searchBox.addEventListener('input', (e) => {
 const searchTerm = e.target.value.toLowerCase().trim();
 let visibleProducts = 0;
-// Filtrar cards de productos
+
 allFlavorCards.forEach(card => {
 const productName = card.getAttribute('data-name');
 const category = card.closest('.product-category');
 const isCategoryVisible = !category.classList.contains('hidden');
+
 if (searchTerm === '' || productName.includes(searchTerm)) {
 if (isCategoryVisible) {
 card.classList.remove('hidden');
@@ -970,7 +999,7 @@ visibleProducts++;
 card.classList.add('hidden');
 }
 });
-// Mostrar mensaje si no hay resultados
+
 if (visibleProducts === 0) {
 noResults.classList.add('show');
 searchResults.style.display = 'none';
@@ -978,18 +1007,21 @@ searchResults.style.display = 'none';
 noResults.classList.remove('show');
 searchResults.style.display = 'block';
 }
-// Actualizar contador
+
 updateResultsCount();
 });
+
 function updateResultsCount() {
 const activeCategory = document.querySelector('.category-btn.active');
 const categoryName = activeCategory ? activeCategory.textContent.trim() : 'Todos';
 let visibleProducts = 0;
+
 allCategories.forEach(category => {
 if (!category.classList.contains('hidden')) {
 visibleProducts += category.querySelectorAll('.flavor-card:not(.hidden)').length;
 }
 });
+
 if (searchBox.value.trim() === '') {
 if (activeCategory && activeCategory.getAttribute('data-category') !== 'all') {
 searchResults.textContent = `${visibleProducts} productos en ${categoryName}`;
